@@ -9,6 +9,8 @@ package library.view;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.*;
+import javax.swing.*;
 
 /**
  *
@@ -42,7 +44,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         acervo = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
@@ -95,7 +97,12 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
         jButton4.setText("Ocorrências");
 
-        jButton5.setText("Logout");
+        logout.setText("Logout");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
         jTextField1.setText("Pesquise aqui");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +126,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(acervo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -162,7 +169,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
+                        .addComponent(logout)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(15, 15, 15)
@@ -189,6 +196,23 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             areaConteudo.revalidate();
         }
     }//GEN-LAST:event_acervoActionPerformed
+
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        if(evt.getSource() == logout){
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            if (JOptionPane.showConfirmDialog(null, "Gostaria de sair?", "LOGOUT",
+               JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null,"Logout feito com sucesso");
+                    dispose();
+                    LoginFrame login_screen = new LoginFrame();
+                    login_screen.setVisible(true);
+                    login_screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    login_screen.setSize(350,150);
+            } else {
+    // no option
+            }
+        }
+    }//GEN-LAST:event_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,7 +255,6 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     protected javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -242,5 +265,6 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton logout;
     // End of variables declaration//GEN-END:variables
 }
