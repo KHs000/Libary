@@ -1,3 +1,3 @@
 <h1>Library</h1>
 
-William pau no cu, não sabe porra nenhuma e fica pedindo coisa que nem ele sabe fazer e eu tenho que tapar esses buraco ¬¬.
+Lá vamos nós fazer Cliente - Servidor sem saber Cliente - Servidor ¬¬.
