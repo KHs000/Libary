@@ -73,7 +73,7 @@ public class Cadastro_Livro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Cadastro Obra");
+        jLabel1.setText("Manutenção Acervo");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Título:");
@@ -104,6 +104,12 @@ public class Cadastro_Livro extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Código:");
+
+        cod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                codMouseEntered(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Foto:");
@@ -160,27 +166,6 @@ public class Cadastro_Livro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(289, 289, 289)
-                        .addComponent(jSeparator1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator2)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(109, 109, 109))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cadastra_novo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(confirma)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
@@ -194,6 +179,9 @@ public class Cadastro_Livro extends javax.swing.JFrame {
                         .addComponent(jLabel9)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(author)
@@ -219,7 +207,21 @@ public class Cadastro_Livro extends javax.swing.JFrame {
                         .addComponent(photo_picker)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(40, Short.MAX_VALUE))))
+                        .addContainerGap(38, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(289, 289, 289)
+                        .addComponent(jSeparator1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cadastra_novo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(confirma)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,6 +292,7 @@ public class Cadastro_Livro extends javax.swing.JFrame {
             String codigo = cod.getText();;
             String reservadas = p_reservadas.getText();
             String subgeneros = subgenero.getText();
+            boolean cadastro = true;
          
         try{
 
@@ -312,10 +315,10 @@ public class Cadastro_Livro extends javax.swing.JFrame {
             dataSource.setServerName("localhost"); 
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("INSERT INTO teste(titulo,autor,editora,assunto,ano,codigo,palavra_reservada,subgeneros)"+
+            stmt.executeUpdate("INSERT INTO teste(Título,Autor,Editora,Assunto,Ano,Código,Palavra_Reservada,Subgêneros)"+
                        "VALUES ('"+titulo+"','"+autor+"','"+editora+"','"+Assunto+"','"+ano+"','"+codigo+"','"+reservadas+"','"
-                       +subgeneros+"')"); 
-            
+                       +subgeneros+"')");
+            JOptionPane.showMessageDialog(null,"Livro cadastrado com sucesso","Cadastro",JOptionPane.INFORMATION_MESSAGE);
             conn.close();   
         }catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Erro");
@@ -371,6 +374,11 @@ public class Cadastro_Livro extends javax.swing.JFrame {
     year.setText("");
         
     }//GEN-LAST:event_cadastra_novoActionPerformed
+
+    private void codMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_codMouseEntered
+        // TODO add your handling code here:
+        cod.setToolTipText("Coloque aqui a identificação ISBN da obra.");
+    }//GEN-LAST:event_codMouseEntered
 
     /**
      * @param args the command line arguments

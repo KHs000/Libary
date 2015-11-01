@@ -76,6 +76,7 @@ public class LoginFrame extends JFrame {
                     else {
                         // Acesso permitido
                         JOptionPane.showMessageDialog(null, "Logado");
+                        Home_Screen_Adm adm = new Home_Screen_Adm();
                     }
                     
                     conexao.close();

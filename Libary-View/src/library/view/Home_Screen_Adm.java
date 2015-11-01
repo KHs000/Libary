@@ -6,23 +6,39 @@
 
 package library.view;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.*;
+import java.sql.*;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author Aluno
  */
 public class Home_Screen_Adm extends javax.swing.JFrame {
-
+            Lista_Livros lista_livros = new Lista_Livros ();    
+            JTable table = new JTable();
     /**
      * Creates new form Home_Screen
      */
     public Home_Screen_Adm() {
         initComponents();
+        
+            
     }
 
     /**
@@ -36,14 +52,13 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        foto = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         areaConteudo = new javax.swing.JPanel();
         adm_profile = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         acervo = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        ocorrencias = new javax.swing.JButton();
         cadastrar_obra = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -52,25 +67,15 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        acervo_header = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         jTextField3.setText("jTextField3");
 
         jTextField4.setText("jTextField4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        foto.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 153, 153), new java.awt.Color(102, 153, 255)));
-
-        javax.swing.GroupLayout fotoLayout = new javax.swing.GroupLayout(foto);
-        foto.setLayout(fotoLayout);
-        fotoLayout.setHorizontalGroup(
-            fotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 162, Short.MAX_VALUE)
-        );
-        fotoLayout.setVerticalGroup(
-            fotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 151, Short.MAX_VALUE)
-        );
+        setBackground(new java.awt.Color(0, 0, 204));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bem vindo Nome!");
@@ -109,9 +114,14 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Ocorrências");
+        ocorrencias.setText("Ocorrências");
+        ocorrencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ocorrenciasActionPerformed(evt);
+            }
+        });
 
-        cadastrar_obra.setText("Cadastrar Obra");
+        cadastrar_obra.setText("Manutenção Acervo");
         cadastrar_obra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrar_obraActionPerformed(evt);
@@ -135,6 +145,11 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         });
 
         jButton6.setText("Pesquisar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Copyright © 2015 Columba");
 
@@ -149,6 +164,22 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
         jButton1.setText("Ajuda");
 
+        acervo_header.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 153));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 155, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,25 +187,29 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(foto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cadastrar_obra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ocorrencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(acervo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adm_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 7, Short.MAX_VALUE)
+                                .addComponent(acervo_header, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6)))
                 .addContainerGap())
@@ -188,20 +223,22 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(acervo_header)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
-                        .addGap(44, 44, 44)
+                        .addGap(41, 41, 41)
                         .addComponent(adm_profile)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(acervo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
+                        .addComponent(ocorrencias)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cadastrar_obra)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -220,6 +257,30 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
+        ResultSetMetaData metaData = rs.getMetaData();
+
+        // names of columns
+        Vector<String> columnNames = new Vector<String>();
+        int columnCount = metaData.getColumnCount();
+        for (int column = 1; column <= columnCount; column++) {
+            columnNames.add(metaData.getColumnName(column));
+        }
+
+        // data of the table
+        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+        while (rs.next()) {
+            Vector<Object> vector = new Vector<Object>();
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                vector.add(rs.getObject(columnIndex));
+            }
+            data.add(vector);
+        }
+
+        return new DefaultTableModel(data, columnNames);
+
+    } 
+    
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
 
         
@@ -230,10 +291,29 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private void acervoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acervoActionPerformed
         if (evt.getSource() == acervo) {
             areaConteudo.removeAll();
-            Lista_Livros table = new Lista_Livros ();
-            
-            areaConteudo.setLayout(new FlowLayout ());
-            areaConteudo.add(table);
+            try{          
+                MysqlDataSource dataSource = new MysqlDataSource();
+                dataSource.setUser("root");
+                dataSource.setPassword("");     
+                dataSource.setDatabaseName("teste");
+                dataSource.setServerName("localhost"); 
+                Connection conn = dataSource.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet result = stmt.executeQuery("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM teste");
+                table = new JTable(buildTableModel(result));
+                conn.close();   
+                acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
+                acervo_header.setVerticalAlignment(SwingConstants.CENTER);
+                acervo_header.setText("Obras cadastradas: "); 
+            }catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro");
+                    ex.printStackTrace();
+            }
+            finally{
+                lista_livros.jScrollPane1.getViewport().add(table);
+                areaConteudo.setLayout(new FlowLayout());
+                areaConteudo.add(lista_livros);
+            } 
             areaConteudo.revalidate();
         }
     }//GEN-LAST:event_acervoActionPerformed
@@ -249,7 +329,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
     private void adm_profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adm_profileActionPerformed
         if(evt.getSource()== adm_profile){
-            dispose();
+            dispose();      
             Perfil_Adm profile = new Perfil_Adm();
             JFrame x = new JFrame();
             x.setSize(1125,745);
@@ -289,6 +369,44 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         jTextField1.setToolTipText("Insira aqui o nome do autor ou do livro.");
     }//GEN-LAST:event_jTextField1MouseEntered
 
+    private void ocorrenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocorrenciasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ocorrenciasActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        if(evt.getSource()== jButton6){
+            areaConteudo.removeAll();
+            try{
+                MysqlDataSource dataSource = new MysqlDataSource();
+                dataSource.setUser("root");
+                dataSource.setPassword("");
+                dataSource.setDatabaseName("teste");
+                dataSource.setServerName("localhost");
+                Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM teste WHERE Autor LIKE ?"+
+                    "OR Título LIKE ? ;");
+                stmt.setString(1,"%"+jTextField1.getText()+"%");
+                stmt.setString(2,"%"+jTextField1.getText()+"%");
+                ResultSet result = stmt.executeQuery();
+                table = new JTable(buildTableModel(result));
+                conn.close();
+                acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
+                acervo_header.setVerticalAlignment(SwingConstants.CENTER);
+                acervo_header.setText("Obras selecionadas: ");
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro");
+                ex.printStackTrace();
+            }
+            finally{
+                lista_livros.jScrollPane1.getViewport().add(table);
+                areaConteudo.setLayout(new FlowLayout());
+                areaConteudo.add(lista_livros);
+            }
+            areaConteudo.revalidate();
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -326,24 +444,24 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acervo;
+    private javax.swing.JLabel acervo_header;
     private javax.swing.JButton adm_profile;
     protected javax.swing.JPanel areaConteudo;
     private javax.swing.JButton cadastrar_obra;
-    protected javax.swing.JPanel foto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     protected javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton logout;
+    private javax.swing.JButton ocorrencias;
     // End of variables declaration//GEN-END:variables
-
 
 }

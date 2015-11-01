@@ -6,12 +6,18 @@
 
 package library.view;
 
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Aluno
  */
 public class Cadastro_Master extends javax.swing.JFrame {
-
+    private JFileChooser chooser = new JFileChooser();
     /**
      * Creates new form Cadastro_Master
      */
@@ -36,9 +42,10 @@ public class Cadastro_Master extends javax.swing.JFrame {
         master = new javax.swing.JTextField();
         master_nickname = new javax.swing.JTextField();
         master_password = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        admin_photo_picker = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         confirma = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,7 +60,12 @@ public class Cadastro_Master extends javax.swing.JFrame {
 
         jLabel5.setText("Foto");
 
-        jButton1.setText("Selecionar arquivo");
+        admin_photo_picker.setText("Selecionar arquivo");
+        admin_photo_picker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                admin_photo_pickerActionPerformed(evt);
+            }
+        });
 
         confirma.setText("Confirmar");
 
@@ -73,12 +85,17 @@ public class Cadastro_Master extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(master, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                                .addComponent(master_nickname)
-                                .addComponent(master_password))
-                            .addComponent(jButton1))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(master, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                                    .addComponent(master_nickname)
+                                    .addComponent(master_password))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(admin_photo_picker)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1)))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 93, Short.MAX_VALUE)
                         .addComponent(jLabel1)
@@ -108,7 +125,8 @@ public class Cadastro_Master extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jButton1))
+                    .addComponent(admin_photo_picker)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -118,6 +136,27 @@ public class Cadastro_Master extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void admin_photo_pickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admin_photo_pickerActionPerformed
+        // TODO add your handling code here:
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("Selecione a imagem do livro");
+        chooser.setAcceptAllFileFilterUsed(false);
+   
+        FileNameExtensionFilter f = new FileNameExtensionFilter("Imagens","png","gif","jpg");
+        chooser.setFileFilter(f);
+        if(chooser.showOpenDialog(chooser)== JFileChooser.APPROVE_OPTION){
+            String x = null;
+            try {
+                x = chooser.getSelectedFile().toURL()+"\\";
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Cadastro_Livro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+            jTextField1.setText(x);
+     }
+    }//GEN-LAST:event_admin_photo_pickerActionPerformed
     private void  confirmaActionPerformed(java.awt.event.ActionEvent evt) {                                         
         if(master.getText()== null || master_nickname.getText()==null || master_password.getText()==null){
             Cadastro_Livro obj = new Cadastro_Livro ();
@@ -167,14 +206,15 @@ public class Cadastro_Master extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton admin_photo_picker;
     private javax.swing.JButton confirma;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField master;
     private javax.swing.JTextField master_nickname;
     private javax.swing.JTextField master_password;
