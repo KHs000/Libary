@@ -6,10 +6,16 @@
 
 package library.view;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.net.MalformedURLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -41,11 +47,15 @@ public class Cadastro_Master extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         master = new javax.swing.JTextField();
         master_nickname = new javax.swing.JTextField();
-        master_password = new javax.swing.JTextField();
         admin_photo_picker = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         confirma = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        master_password = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        emailfield = new javax.swing.JTextField();
+        telephonefield = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +78,15 @@ public class Cadastro_Master extends javax.swing.JFrame {
         });
 
         confirma.setText("Confirmar");
+        confirma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("E-mail:");
+
+        jLabel7.setText("Telefone:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,33 +96,45 @@ public class Cadastro_Master extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(72, 72, 72))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(master, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                                     .addComponent(master_nickname)
-                                    .addComponent(master_password))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(admin_photo_picker)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 93, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(72, 72, 72))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(master_password)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(15, 15, 15)
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(admin_photo_picker)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextField1))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(15, 15, 15)
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(emailfield))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(1, 1, 1)
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(telephonefield, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(22, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(166, 166, 166)
                 .addComponent(confirma)
-                .addGap(153, 153, 153))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,14 +153,22 @@ public class Cadastro_Master extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(master_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(emailfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(telephonefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(admin_photo_picker)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(confirma)
                 .addContainerGap())
         );
@@ -157,14 +196,34 @@ public class Cadastro_Master extends javax.swing.JFrame {
             jTextField1.setText(x);
      }
     }//GEN-LAST:event_admin_photo_pickerActionPerformed
-    private void  confirmaActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        if(master.getText()== null || master_nickname.getText()==null || master_password.getText()==null){
-            Cadastro_Livro obj = new Cadastro_Livro ();
-            
-        }else{
-            String name = master.getText(); String m_nickname = master_nickname.getText();String m_password = master_password.getText();
+
+    private void confirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmaActionPerformed
+        // TODO add your handling code here:
+        if(evt.getSource()==confirma){
+            try{          
+                MysqlDataSource dataSource = new MysqlDataSource();
+                dataSource.setUser("root");
+                dataSource.setPassword("");
+                dataSource.setDatabaseName("biblioteca");
+                dataSource.setServerName("localhost"); 
+                Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO admin (Nome,Login,Senha,Email,Telefone) VALUES (?,?,?,?,?)");
+                stmt.setString(1, master.getText());
+                stmt.setString(2, master_nickname.getText());
+                stmt.setString(3, master_password.getText());
+                stmt.setString(4, emailfield.getText());
+                stmt.setString(5, telephonefield.getText());
+                stmt.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null,"Admnistrador cadastrado com sucesso","Cadastro",JOptionPane.INFORMATION_MESSAGE);
+                conn.close();   
+            }catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro");
+                ex.printStackTrace();
+            }
         }
-    }                                        
+    }//GEN-LAST:event_confirmaActionPerformed
+                                    
     /*
      private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 
@@ -208,15 +267,19 @@ public class Cadastro_Master extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton admin_photo_picker;
     private javax.swing.JButton confirma;
+    private javax.swing.JTextField emailfield;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField master;
     private javax.swing.JTextField master_nickname;
-    private javax.swing.JTextField master_password;
+    private javax.swing.JPasswordField master_password;
+    private javax.swing.JTextField telephonefield;
     // End of variables declaration//GEN-END:variables
 }

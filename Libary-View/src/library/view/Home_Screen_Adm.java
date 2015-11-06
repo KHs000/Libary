@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -31,14 +33,16 @@ import javax.imageio.ImageIO;
  */
 public class Home_Screen_Adm extends javax.swing.JFrame {
             Lista_Livros lista_livros = new Lista_Livros ();    
-            JTable table = new JTable();
+            
     /**
      * Creates new form Home_Screen
      */
-    public Home_Screen_Adm() {
+    public Home_Screen_Adm(){
         initComponents();
-        
-            
+    }
+    public Home_Screen_Adm(String name) {
+        initComponents();
+        jLabel1.setText("Bem vindo "+name+"!");
     }
 
     /**
@@ -62,11 +66,11 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         cadastrar_obra = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        pesquisar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        ajuda = new javax.swing.JButton();
         acervo_header = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
 
@@ -79,6 +83,18 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bem vindo Nome!");
+
+        areaConteudo.setEnabled(false);
+        areaConteudo.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                areaConteudoComponentAdded(evt);
+            }
+        });
+        areaConteudo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                areaConteudoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout areaConteudoLayout = new javax.swing.GroupLayout(areaConteudo);
         areaConteudo.setLayout(areaConteudoLayout);
@@ -144,10 +160,10 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("Pesquisar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        pesquisar.setText("Pesquisar");
+        pesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                pesquisarActionPerformed(evt);
             }
         });
 
@@ -162,7 +178,17 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ajuda");
+        ajuda.setText("Ajuda");
+        ajuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ajudaMouseEntered(evt);
+            }
+        });
+        ajuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ajudaActionPerformed(evt);
+            }
+        });
 
         acervo_header.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
@@ -199,7 +225,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ajuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +237,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                                 .addGap(0, 7, Short.MAX_VALUE)
                                 .addComponent(acervo_header, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)))
+                        .addComponent(pesquisar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -222,16 +248,16 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                            .addComponent(pesquisar))
+                        .addGap(22, 22, 22)
                         .addComponent(acervo_header)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
-                        .addGap(41, 41, 41)
+                        .addGap(35, 35, 35)
                         .addComponent(adm_profile)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
@@ -244,14 +270,14 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(ajuda)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(logout)
                         .addGap(15, 15, 15)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)))
-                .addGap(15, 15, 15))
+                .addContainerGap())
         );
 
         pack();
@@ -259,8 +285,8 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     
     public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
         ResultSetMetaData metaData = rs.getMetaData();
-
         // names of columns
+
         Vector<String> columnNames = new Vector<String>();
         int columnCount = metaData.getColumnCount();
         for (int column = 1; column <= columnCount; column++) {
@@ -277,31 +303,65 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             data.add(vector);
         }
 
-        return new DefaultTableModel(data, columnNames);
+        return new DefaultTableModel(data, columnNames){
+            @Override
+            public boolean isCellEditable(int row,int column){
+                return false;
+            }
+        };
 
     } 
     
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-
-        
-
-        
+   
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void acervoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acervoActionPerformed
         if (evt.getSource() == acervo) {
             areaConteudo.removeAll();
-            try{          
+            try{
                 MysqlDataSource dataSource = new MysqlDataSource();
                 dataSource.setUser("root");
                 dataSource.setPassword("");     
-                dataSource.setDatabaseName("teste");
+                dataSource.setDatabaseName("biblioteca");
                 dataSource.setServerName("localhost"); 
                 Connection conn = dataSource.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet result = stmt.executeQuery("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM teste");
-                table = new JTable(buildTableModel(result));
+                ResultSet result = stmt.executeQuery("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM acervo");
+                lista_livros.jTable1 = new JTable(buildTableModel(result));
+                //lista_livros.jTable1.setFocusable(false);
+                lista_livros.jTable1.setRowSelectionAllowed(true);
+                lista_livros.jTable1.setForeground(new Color(9,22,214));
+                lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(ListSelectionEvent e) {
+                        int row = lista_livros.jTable1.getSelectedRow();
+                        DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
+                        String selected = model.getValueAt(row,0).toString();
+                        if(row>=0){
+                            try{
+                                MysqlDataSource dataSource = new MysqlDataSource();
+                                dataSource.setUser("root");
+                                dataSource.setPassword("");     
+                                dataSource.setDatabaseName("biblioteca");
+                                dataSource.setServerName("localhost"); 
+                                Connection conn = dataSource.getConnection();
+                                if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
+                                    PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
+                                    stmt.setString(1,selected);
+                                    stmt.executeUpdate();
+                                    //model.removeRow(row);
+                                    areaConteudo.revalidate();
+                                    areaConteudo.repaint();
+                                }
+                            }catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                        } 
+                    }
+                });
                 conn.close();   
+                
                 acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
                 acervo_header.setVerticalAlignment(SwingConstants.CENTER);
                 acervo_header.setText("Obras cadastradas: "); 
@@ -310,9 +370,9 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                     ex.printStackTrace();
             }
             finally{
-                lista_livros.jScrollPane1.getViewport().add(table);
+                lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
                 areaConteudo.setLayout(new FlowLayout());
-                areaConteudo.add(lista_livros);
+                areaConteudo.add(lista_livros); 
             } 
             areaConteudo.revalidate();
         }
@@ -328,14 +388,33 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastrar_obraActionPerformed
 
     private void adm_profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adm_profileActionPerformed
-        if(evt.getSource()== adm_profile){
-            dispose();      
-            Perfil_Adm profile = new Perfil_Adm();
-            JFrame x = new JFrame();
-            x.setSize(1125,745);
-            x.add(profile);
-            x.setVisible(true);
-            x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        if(evt.getSource()== adm_profile){    
+            Perfil_Adm profile = new Perfil_Adm(jLabel1.getText().substring(10,jLabel1.getText().length()-1));
+            try{
+                MysqlDataSource dataSource = new MysqlDataSource();
+                dataSource.setUser("root");
+                dataSource.setPassword("");     
+                dataSource.setDatabaseName("biblioteca");
+                dataSource.setServerName("localhost"); 
+                Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("SELECT Login,Senha,Email,Telefone FROM admin WHERE Login = ?");
+                stmt.setString(1,jLabel1.getText().substring(10,jLabel1.getText().length()-1));
+                ResultSet rs = stmt.executeQuery();
+                System.out.println(rs.getString("Email"));
+                //profile.chg_name.setText(rs.getString("Login"));
+                //profile.chg_pass.setText(rs.getString("Senha"));
+                //profile.chg_mail.setText(rs.getString("Email"));
+                //profile.chg_mail.setText(rs.getString("Telefone"));
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+            finally{
+                JFrame x = new JFrame();
+                x.setSize(1125,745);
+                x.add(profile);
+                x.setVisible(true);
+                x.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
             
         }
     }//GEN-LAST:event_adm_profileActionPerformed
@@ -346,9 +425,10 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
+        //JOptionPane.showMessageDialog(null,,"",JOptionPane.INFORMATION_MESSAGE);
         if(evt.getSource() == logout){
             dispose();
-            LoginFrame log = new LoginFrame();
+            Login_Frame log = new Login_Frame();
             log.setVisible(true);
             log.setSize(475,140);
             log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -371,42 +451,83 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
     private void ocorrenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocorrenciasActionPerformed
         // TODO add your handling code here:
+        //JOptionPane.showMessageDialog(null,,"teste",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ocorrenciasActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
         // TODO add your handling code here:
-        if(evt.getSource()== jButton6){
+        if(evt.getSource()== pesquisar){
             areaConteudo.removeAll();
-            try{
+            if(jTextField1.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"O campo não pode ficar vazio na hora de pesquisa.","Aviso",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                try{
                 MysqlDataSource dataSource = new MysqlDataSource();
                 dataSource.setUser("root");
                 dataSource.setPassword("");
-                dataSource.setDatabaseName("teste");
+                dataSource.setDatabaseName("biblioteca");
                 dataSource.setServerName("localhost");
-                Connection conn = dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM teste WHERE Autor LIKE ?"+
-                    "OR Título LIKE ? ;");
+                Connection conn = dataSource.getConnection();  
+                PreparedStatement stmt = conn.prepareStatement("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM acervo WHERE Autor LIKE ?"+
+                    "OR Título LIKE ?");
                 stmt.setString(1,"%"+jTextField1.getText()+"%");
                 stmt.setString(2,"%"+jTextField1.getText()+"%");
                 ResultSet result = stmt.executeQuery();
-                table = new JTable(buildTableModel(result));
+                lista_livros.jTable1 = new JTable(buildTableModel(result));
                 conn.close();
                 acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
                 acervo_header.setVerticalAlignment(SwingConstants.CENTER);
+                lista_livros.jTable1.setFocusable(false);
+                lista_livros.jTable1.setRowSelectionAllowed(true);
+                lista_livros.jTable1.setForeground(new Color(255,0,128));     //Boa cor para livro já pego
                 acervo_header.setText("Obras selecionadas: ");
+           
+                
+                conn.close();
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Erro");
                 ex.printStackTrace();
             }
             finally{
-                lista_livros.jScrollPane1.getViewport().add(table);
+                lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
                 areaConteudo.setLayout(new FlowLayout());
                 areaConteudo.add(lista_livros);
+                
+            }
             }
             areaConteudo.revalidate();
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_pesquisarActionPerformed
 
+    private void ajudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajudaActionPerformed
+        // TODO add your handling code here:
+        Tela_Ajuda aj = new Tela_Ajuda();
+        aj.setVisible(true);
+        aj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+    }//GEN-LAST:event_ajudaActionPerformed
+
+    private void ajudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ajudaMouseEntered
+        // TODO add your handling code here:
+        if(evt.getSource()== ajuda){
+            
+        }
+        
+    }//GEN-LAST:event_ajudaMouseEntered
+
+    private void areaConteudoComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_areaConteudoComponentAdded
+        // TODO add your handling code here:
+        //if(evt.getSource() == lista_livros.jTable1){
+        //int row = lista_livros.jTable1.getSelectedRow();
+        //JOptionPane.showMessageDialog(areaConteudo, row,"d",JOptionPane.INFORMATION_MESSAGE);
+        //}
+    }//GEN-LAST:event_areaConteudoComponentAdded
+
+    private void areaConteudoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaConteudoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_areaConteudoMouseClicked
+//
     /**
      * @param args the command line arguments
      */
@@ -418,7 +539,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Windows Classic".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }                
@@ -446,11 +567,10 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JButton acervo;
     private javax.swing.JLabel acervo_header;
     private javax.swing.JButton adm_profile;
+    private javax.swing.JButton ajuda;
     protected javax.swing.JPanel areaConteudo;
     private javax.swing.JButton cadastrar_obra;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
     protected javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -462,6 +582,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton logout;
     private javax.swing.JButton ocorrencias;
+    private javax.swing.JButton pesquisar;
     // End of variables declaration//GEN-END:variables
 
 }

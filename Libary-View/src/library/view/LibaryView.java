@@ -29,7 +29,8 @@ public class LibaryView {
         } 
         //Este código acima seta o Look and Feel das telas para Nimbus
         
-        Home_Screen_Adm window = new Home_Screen_Adm ();
+        //Home_Screen_Adm window = new Home_Screen_Adm ();
+        Login_Frame window = new Login_Frame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
     }

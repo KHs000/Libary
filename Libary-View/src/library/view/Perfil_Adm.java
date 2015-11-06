@@ -5,8 +5,14 @@
  */
 
 package library.view;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 /**
  *
@@ -17,7 +23,11 @@ public class Perfil_Adm extends javax.swing.JPanel {
     /**
      * Creates new form Perfil
      */
-    public Perfil_Adm() {
+    public Perfil_Adm(String name) {
+        initComponents();
+        chg_name.setText(name);
+    }
+    public Perfil_Adm(){
         initComponents();
     }
 
@@ -35,14 +45,14 @@ public class Perfil_Adm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        chg_name = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        chg_pass = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        chg_mail = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        chg_phone = new javax.swing.JTextField();
+        change_data_button = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -71,27 +81,32 @@ public class Perfil_Adm extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jLabel2.setText("Nome:");
+        jLabel2.setText("Login:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        chg_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                chg_nameActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Matrícula:");
+        jLabel3.setText("Senha:");
 
         jLabel4.setText("Email:");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        chg_mail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                chg_mailActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Telefone:");
 
-        jButton1.setText("Alterar Senha");
+        change_data_button.setText("Alterar dados(s)");
+        change_data_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                change_data_buttonActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Livros Emprestados");
@@ -203,24 +218,22 @@ public class Perfil_Adm extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))
-                        .addGap(37, 37, 37)
+                        .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(jTextField3))
+                                    .addComponent(chg_name, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(chg_mail))
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(1, 1, 1))
-                            .addComponent(jLabel8))
+                            .addComponent(change_data_button))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(jTextField4))
+                            .addComponent(chg_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(chg_phone))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -244,9 +257,9 @@ public class Perfil_Adm extends javax.swing.JPanel {
                         .addGap(90, 90, 90)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chg_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chg_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -255,16 +268,15 @@ public class Perfil_Adm extends javax.swing.JPanel {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(chg_mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(chg_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
-                .addGap(39, 39, 39)
+                .addGap(27, 27, 27)
+                .addComponent(change_data_button)
+                .addGap(44, 44, 44)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -296,28 +308,57 @@ public class Perfil_Adm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void chg_mailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chg_mailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_chg_mailActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void chg_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chg_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_chg_nameActionPerformed
 
     private void back2homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back2homeActionPerformed
         // TODO add your handling code here:]
         Window dialog = SwingUtilities.windowForComponent(back2home);
         dialog.dispose();
-        Home_Screen_Adm home = new Home_Screen_Adm();
-        home.setVisible(true);
-        home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Home_Screen_Adm home = new Home_Screen_Adm();
+        //home.setVisible(true);
+        //home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
     }//GEN-LAST:event_back2homeActionPerformed
+
+    private void change_data_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_data_buttonActionPerformed
+        // TODO add your handling code here:
+        if(evt.getSource()== change_data_button){
+            try{
+                if(JOptionPane.showConfirmDialog(null,"Tem certeza que gostaria de alterar esses dados?","Alteração",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
+                    MysqlDataSource dataSource = new MysqlDataSource();
+                    dataSource.setUser("root");
+                    dataSource.setPassword("");
+                    dataSource.setDatabaseName("biblioteca");
+                    dataSource.setServerName("localhost"); 
+                    Connection conn = dataSource.getConnection();
+                    /*
+                    PreparedStatement stmt = conn.prepareStatement("UPDATE admin SET Login = ?, Senha = ?, Email = ?, Telefone = ?");
+                    stmt.setString(1, chg_name.getText());
+                    stmt.setString(2,chg_pass.getText());
+                    stmt.setString(3,chg_mail.getText());
+                    stmt.setString(4,chg_phone.getText());
+                    stmt.executeUpdate(); */
+                }   
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_change_data_buttonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back2home;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton change_data_button;
+    protected javax.swing.JTextField chg_mail;
+    protected javax.swing.JTextField chg_name;
+    protected javax.swing.JTextField chg_pass;
+    protected javax.swing.JTextField chg_phone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -336,9 +377,5 @@ public class Perfil_Adm extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }

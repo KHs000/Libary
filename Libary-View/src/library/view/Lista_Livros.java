@@ -6,6 +6,7 @@
 
 package library.view;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import java.awt.Color;
 import java.sql.*;
 import javax.sql.*;
 import java.util.*;
@@ -66,9 +67,17 @@ public class Lista_Livros extends javax.swing.JPanel {
                 "Título", "Autor", "Gênero", "Editora", "Ano", "Disponibilidade"
             }
         ));
+        jTable1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jTable1ComponentAdded(evt);
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTable1MouseEntered(evt);
             }
         });
         jScrollPane2.setViewportView(jTable1);
@@ -79,18 +88,29 @@ public class Lista_Livros extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseEntered
+
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here
-         
+        //JOptionPane.showMessageDialog(null, jScrollPane1, "sfdghfgdsa", JOptionPane.INFORMATION_MESSAGE);
+        jTable1.getComponents();
+        int row = jTable1.getSelectedRow();
+        JOptionPane.showMessageDialog(null, row,"teste",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jTable1ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1ComponentAdded
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
