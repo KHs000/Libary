@@ -368,12 +368,12 @@ public class Cadastro_Livro extends javax.swing.JFrame {
 
     private void p_reservadasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_reservadasMouseEntered
         // TODO add your handling code here:
-        p_reservadas.setToolTipText("Separe os gêneros por vírgula.");
+        p_reservadas.setToolTipText("Separe os gêneros por espaço.");
     }//GEN-LAST:event_p_reservadasMouseEntered
 
     private void subgeneroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_subgeneroMouseEntered
         // TODO add your handling code here:
-        subgenero.setToolTipText("Separe os subgêneros por vírgula");
+        subgenero.setToolTipText("Separe os subgêneros por espaço");
     }//GEN-LAST:event_subgeneroMouseEntered
 
     private void jTextField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseEntered
