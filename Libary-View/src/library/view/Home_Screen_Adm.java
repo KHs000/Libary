@@ -7,25 +7,27 @@
 package library.view;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.*;
-import java.sql.*;
-import java.util.Vector;
-import javax.swing.table.DefaultTableModel;
+import java.awt.FlowLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -332,34 +334,67 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 //lista_livros.jTable1.setFocusable(false);
                 lista_livros.jTable1.setRowSelectionAllowed(true);
                 lista_livros.jTable1.setForeground(new Color(9,22,214));
-                lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                
+                MouseListener rightEvt = new MouseListener () {
                     @Override
-                    public void valueChanged(ListSelectionEvent e) {
-                        int row = lista_livros.jTable1.getSelectedRow();
-                        DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
-                        String selected = model.getValueAt(row,0).toString();
-                        if(row>=0){
-                            try{
-                                MysqlDataSource dataSource = new MysqlDataSource();
-                                dataSource.setUser("root");
-                                dataSource.setPassword("");     
-                                dataSource.setDatabaseName("biblioteca");
-                                dataSource.setServerName("localhost"); 
-                                Connection conn = dataSource.getConnection();
-                                if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
-                                    PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
-                                    stmt.setString(1,selected);
-                                    stmt.executeUpdate();
-                                    //model.removeRow(row);
-                                    areaConteudo.revalidate();
-                                    areaConteudo.repaint();
-                                }
-                            }catch (SQLException ex) {
-                                ex.printStackTrace();
+                    public void mouseClicked(MouseEvent e) {
+                        if (SwingUtilities.isRightMouseButton(e)) {
+                            JOptionPane.showMessageDialog(null, "ok");
+                        }
+                        if (SwingUtilities.isLeftMouseButton(e)) {
+                            lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                            @Override
+                            public void valueChanged(ListSelectionEvent e) {
+                                int row = lista_livros.jTable1.getSelectedRow();
+                                DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
+                                String selected = model.getValueAt(row,0).toString();
+                                
+                                    try{
+                                        MysqlDataSource dataSource = new MysqlDataSource();
+                                        dataSource.setUser("root");
+                                        dataSource.setPassword("");     
+                                        dataSource.setDatabaseName("biblioteca");
+                                        dataSource.setServerName("localhost"); 
+                                        Connection conn = dataSource.getConnection();
+
+                                        if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
+                                            PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
+                                            stmt.setString(1,selected);
+                                            stmt.executeUpdate();
+                                            //model.removeRow(row);
+                                            areaConteudo.revalidate();
+                                            areaConteudo.repaint();
+                                        }
+                                    }catch (SQLException ex) {
+                                        ex.printStackTrace();
+                                    }
                             }
-                        } 
+                        });
+                        }
                     }
-                });
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        //'throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                };
+                lista_livros.jTable1.addMouseListener(rightEvt); 
+                
                 conn.close();   
                 
                 acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
@@ -448,7 +483,6 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 dataSource.setDatabaseName("biblioteca");
                 dataSource.setServerName("localhost"); 
                 Connection conn = dataSource.getConnection();
-                Statement stmt = dataSource.getConnection();
             }catch(SQLException ex){
                 ex.printStackTrace();
             }
@@ -462,7 +496,6 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
     private void ocorrenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocorrenciasActionPerformed
         // TODO add your handling code here:
-        //JOptionPane.showMessageDialog(null,,"teste",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ocorrenciasActionPerformed
 
     private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
@@ -496,16 +529,15 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
            
                 
                 conn.close();
-            }catch(SQLException ex){
-                JOptionPane.showMessageDialog(null, "Erro");
-                ex.printStackTrace();
-            }
-            finally{
-                lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
-                areaConteudo.setLayout(new FlowLayout());
-                areaConteudo.add(lista_livros);
-                
-            }
+                }catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro");
+                    ex.printStackTrace();
+                }
+                finally{
+                    lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
+                    areaConteudo.setLayout(new FlowLayout());
+                    areaConteudo.add(lista_livros);
+                }
             }
             areaConteudo.revalidate();
         }
