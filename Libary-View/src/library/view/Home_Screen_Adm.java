@@ -397,10 +397,10 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 dataSource.setDatabaseName("biblioteca");
                 dataSource.setServerName("localhost"); 
                 Connection conn = dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("SELECT Login,Senha,Email,Telefone FROM admin WHERE Login = ?");
-                stmt.setString(1,jLabel1.getText().substring(10,jLabel1.getText().length()-1));
-                ResultSet rs = stmt.executeQuery();
-                System.out.println(rs.getString("Email"));
+                //PreparedStatement stmt = conn.prepareStatement("SELECT Login,Senha,Email,Telefone FROM admin WHERE Login = ?");
+                //stmt.setString(1,jLabel1.getText().substring(10,jLabel1.getText().length()-1));
+                //ResultSet rs = stmt.executeQuery();
+                //System.out.println(rs.getString("Email")); 
                 //profile.chg_name.setText(rs.getString("Login"));
                 //profile.chg_pass.setText(rs.getString("Senha"));
                 //profile.chg_mail.setText(rs.getString("Email"));
@@ -441,6 +441,17 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             Pesquisa_Composta_Adm pq = new Pesquisa_Composta_Adm();
             pq.setVisible(true);
             pq.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            try{
+                MysqlDataSource dataSource = new MysqlDataSource();
+                dataSource.setUser("root");
+                dataSource.setPassword("");     
+                dataSource.setDatabaseName("biblioteca");
+                dataSource.setServerName("localhost"); 
+                Connection conn = dataSource.getConnection();
+                Statement stmt = dataSource.getConnection();
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
