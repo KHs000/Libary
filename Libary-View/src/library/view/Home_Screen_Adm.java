@@ -9,6 +9,9 @@ package library.view;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.awt.*;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -34,7 +37,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Aluno
  */
 public class Home_Screen_Adm extends javax.swing.JFrame {
-            Lista_Livros lista_livros = new Lista_Livros ();    
+    Lista_Livros lista_livros = new Lista_Livros ();    
             
     /**
      * Creates new form Home_Screen
@@ -339,9 +342,91 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (SwingUtilities.isRightMouseButton(e)) {
-                            JOptionPane.showMessageDialog(null, "ok");
+                            JPopupMenu popup = new JPopupMenu();
+                            
+                            class PopupListener extends MouseAdapter {
+                                @Override
+                                public void mousePressed(MouseEvent e) {
+                                    maybeShowPopup(e);
+                                }
+
+                                @Override
+                                public void mouseReleased(MouseEvent e) {
+                                    maybeShowPopup(e);
+                                }
+
+                                private void maybeShowPopup(MouseEvent e) {
+                                    if (e.isPopupTrigger()) {
+                                        popup.show(e.getComponent(),
+                                                   e.getX(), e.getY());
+                                    }
+                                }
+                            }
+                            
+                            JMenuItem del = new JMenuItem ("Deletar");
+                            del.addActionListener(new ActionListener () {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                                    @Override
+                                    public void valueChanged(ListSelectionEvent e) {
+                                        int row = lista_livros.jTable1.getSelectedRow();
+                                        DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
+                                        String selected = model.getValueAt(row,0).toString();
+
+                                            try{
+                                                MysqlDataSource dataSource = new MysqlDataSource();
+                                                dataSource.setUser("root");
+                                                dataSource.setPassword("");     
+                                                dataSource.setDatabaseName("biblioteca");
+                                                dataSource.setServerName("localhost"); 
+                                                Connection conn = dataSource.getConnection();
+
+                                                if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
+                                                    PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
+                                                    stmt.setString(1,selected);
+                                                    stmt.executeUpdate();
+                                                    areaConteudo.revalidate();
+                                                    areaConteudo.repaint();
+                                                }
+                                            }catch (SQLException ex) {
+                                                ex.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                            popup.add(del);
+                            
+                            JMenuItem rent = new JMenuItem ("Sobre");
+                            rent.addActionListener(new ActionListener () {
+                                @Override
+                                public void actionPerformed(ActionEvent evt) {
+                                    int row = lista_livros.jTable1.rowAtPoint(e.getPoint());
+                                    DefaultTableModel model = (DefaultTableModel)lista_livros.jTable1.getModel();
+                                    String selected = (String) model.getValueAt(row,0);
+
+                                    Tela_Livro book = new Tela_Livro ();
+
+                                    book.titulo.setText(lista_livros.jTable1.getName());
+                                    JOptionPane.showMessageDialog(null, selected);
+                                }
+                        });
+                            popup.add(rent);
+                            
+                            MouseListener popupListener = new PopupListener();
+                            lista_livros.jTable1.addMouseListener(popupListener);
+                            
+                            /*int row = lista_livros.jTable1.rowAtPoint(e.getPoint());
+                            DefaultTableModel model = (DefaultTableModel)lista_livros.jTable1.getModel();
+                            String selected = (String) model.getValueAt(row,0);
+                            
+                            Tela_Livro book = new Tela_Livro ();
+                            
+                            book.titulo.setText(lista_livros.jTable1.getName());
+                            JOptionPane.showMessageDialog(null, selected);*/
                         }
-                        if (SwingUtilities.isLeftMouseButton(e)) {
+                        /*if (SwingUtilities.isLeftMouseButton(e)) {
                             lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
                             @Override
                             public void valueChanged(ListSelectionEvent e) {
@@ -370,7 +455,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                                     }
                             }
                         });
-                        }
+                        }*/
                     }
 
                     @Override
@@ -605,7 +690,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acervo;
     private javax.swing.JLabel acervo_header;
