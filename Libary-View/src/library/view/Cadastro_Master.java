@@ -216,9 +216,10 @@ public class Cadastro_Master extends javax.swing.JFrame {
                 stmt.executeUpdate();
                 
                 JOptionPane.showMessageDialog(null,"Admnistrador cadastrado com sucesso","Cadastro",JOptionPane.INFORMATION_MESSAGE);
+                dispose();
                 conn.close();   
             }catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro");
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar bibliotecário.");
                 ex.printStackTrace();
             }
         }

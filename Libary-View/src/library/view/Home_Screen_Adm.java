@@ -67,7 +67,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         adm_profile = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         acervo = new javax.swing.JButton();
-        ocorrencias = new javax.swing.JButton();
+        usuarios = new javax.swing.JButton();
         cadastrar_obra = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -78,6 +78,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         ajuda = new javax.swing.JButton();
         acervo_header = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        ocorrencias = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -135,10 +136,10 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             }
         });
 
-        ocorrencias.setText("Ocorrências");
-        ocorrencias.addActionListener(new java.awt.event.ActionListener() {
+        usuarios.setText("Usuários");
+        usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ocorrenciasActionPerformed(evt);
+                usuariosActionPerformed(evt);
             }
         });
 
@@ -211,35 +212,43 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             .addGap(0, 155, Short.MAX_VALUE)
         );
 
+        ocorrencias.setText("Ocorrências");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cadastrar_obra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ocorrencias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(acervo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adm_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(acervo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(adm_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ajuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ajuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 10, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cadastrar_obra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(ocorrencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 7, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(acervo_header, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pesquisar)))
@@ -269,16 +278,22 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(acervo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ocorrencias)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cadastrar_obra)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ajuda)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(logout)
-                        .addGap(15, 15, 15)
+                        .addComponent(usuarios)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(126, 126, 126))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ocorrencias)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cadastrar_obra)
+                                .addGap(1, 1, 1)
+                                .addComponent(ajuda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(logout)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)))
@@ -333,12 +348,16 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 Connection conn = dataSource.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet result = stmt.executeQuery("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM acervo");
+                //diegoResultSet m = stmt.executeQuery("SELECT Disponibilidade FROM acervo");
                 lista_livros.jTable1 = new JTable(buildTableModel(result));
                 //lista_livros.jTable1.setFocusable(false);
                 lista_livros.jTable1.setRowSelectionAllowed(true);
                 lista_livros.jTable1.setForeground(new Color(9,22,214));
                 
-                MouseListener rightEvt = new MouseListener () {
+                //System.out.println(result.getString("Disponibilidade"));
+                
+                MouseListener rightEvt;
+                rightEvt = new MouseListener () {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (SwingUtilities.isRightMouseButton(e)) {
@@ -358,42 +377,64 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                                 private void maybeShowPopup(MouseEvent e) {
                                     if (e.isPopupTrigger()) {
                                         popup.show(e.getComponent(),
-                                                   e.getX(), e.getY());
+                                                e.getX(), e.getY());
                                     }
                                 }
                             }
                             
                             JMenuItem del = new JMenuItem ("Deletar");
                             del.addActionListener(new ActionListener () {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                                public void actionPerformed(ActionEvent evt) {
+                                    int row = lista_livros.jTable1.rowAtPoint(e.getPoint());
+                                    DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
+                                    String selected = model.getValueAt(row,0).toString();
+                                    try{
+                                        MysqlDataSource dataSource = new MysqlDataSource();
+                                        dataSource.setUser("root");
+                                        dataSource.setPassword("");
+                                        dataSource.setDatabaseName("biblioteca");
+                                        dataSource.setServerName("localhost");
+                                        Connection conn = dataSource.getConnection();
+                                        
+                                        if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
+                                            PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
+                                            stmt.setString(1,selected);
+                                            stmt.executeUpdate();
+                                            areaConteudo.revalidate();
+                                            areaConteudo.repaint();
+                                        }
+                                    }catch (SQLException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                    
+                                    /*lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                                    
                                     @Override
                                     public void valueChanged(ListSelectionEvent e) {
-                                        int row = lista_livros.jTable1.getSelectedRow();
-                                        DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
-                                        String selected = model.getValueAt(row,0).toString();
+                                    int row = lista_livros.jTable1.getSelectedRow();
+                                    DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
+                                    String selected = model.getValueAt(row,0).toString();
+                                    
+                                    try{
+                                    MysqlDataSource dataSource = new MysqlDataSource();
+                                    dataSource.setUser("root");
+                                    dataSource.setPassword("");     
+                                    dataSource.setDatabaseName("biblioteca");
+                                    dataSource.setServerName("localhost"); 
+                                    Connection conn = dataSource.getConnection();
 
-                                            try{
-                                                MysqlDataSource dataSource = new MysqlDataSource();
-                                                dataSource.setUser("root");
-                                                dataSource.setPassword("");     
-                                                dataSource.setDatabaseName("biblioteca");
-                                                dataSource.setServerName("localhost"); 
-                                                Connection conn = dataSource.getConnection();
-
-                                                if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
-                                                    PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
-                                                    stmt.setString(1,selected);
-                                                    stmt.executeUpdate();
-                                                    areaConteudo.revalidate();
-                                                    areaConteudo.repaint();
-                                                }
-                                            }catch (SQLException ex) {
-                                                ex.printStackTrace();
-                                            }
-                                        }
-                                    });
+                                    if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
+                                    PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
+                                    stmt.setString(1,selected);
+                                    stmt.executeUpdate();
+                                    areaConteudo.revalidate();
+                                    areaConteudo.repaint();
+                                    }
+                                    }catch (SQLException ex) {
+                                    ex.printStackTrace();
+                                    }
+                                    }
+                                    }); */
                                 }
                             });
                             popup.add(del);
@@ -404,14 +445,16 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                                 public void actionPerformed(ActionEvent evt) {
                                     int row = lista_livros.jTable1.rowAtPoint(e.getPoint());
                                     DefaultTableModel model = (DefaultTableModel)lista_livros.jTable1.getModel();
-                                    String selected = (String) model.getValueAt(row,0);
+                                    String selected = model.getValueAt(row,0).toString();
 
                                     Tela_Livro book = new Tela_Livro ();
-
-                                    book.titulo.setText(lista_livros.jTable1.getName());
-                                    JOptionPane.showMessageDialog(null, selected);
+                                    book.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                    book.titulo.setText(selected);
+                                    //JOptionPane.showMessageDialog(null, book);
+                                    book.setVisible(true);
+    
                                 }
-                        });
+                            });
                             popup.add(rent);
                             
                             MouseListener popupListener = new PopupListener();
@@ -427,33 +470,33 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, selected);*/
                         }
                         /*if (SwingUtilities.isLeftMouseButton(e)) {
-                            lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                            @Override
-                            public void valueChanged(ListSelectionEvent e) {
-                                int row = lista_livros.jTable1.getSelectedRow();
-                                DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
-                                String selected = model.getValueAt(row,0).toString();
-                                
-                                    try{
-                                        MysqlDataSource dataSource = new MysqlDataSource();
-                                        dataSource.setUser("root");
-                                        dataSource.setPassword("");     
-                                        dataSource.setDatabaseName("biblioteca");
-                                        dataSource.setServerName("localhost"); 
-                                        Connection conn = dataSource.getConnection();
-
-                                        if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
-                                            PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
-                                            stmt.setString(1,selected);
-                                            stmt.executeUpdate();
-                                            //model.removeRow(row);
-                                            areaConteudo.revalidate();
-                                            areaConteudo.repaint();
-                                        }
-                                    }catch (SQLException ex) {
-                                        ex.printStackTrace();
-                                    }
-                            }
+                        lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                        @Override
+                        public void valueChanged(ListSelectionEvent e) {
+                        int row = lista_livros.jTable1.getSelectedRow();
+                        DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
+                        String selected = model.getValueAt(row,0).toString();
+                        
+                        try{
+                        MysqlDataSource dataSource = new MysqlDataSource();
+                        dataSource.setUser("root");
+                        dataSource.setPassword("");
+                        dataSource.setDatabaseName("biblioteca");
+                        dataSource.setServerName("localhost");
+                        Connection conn = dataSource.getConnection();
+                        
+                        if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
+                        PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
+                        stmt.setString(1,selected);
+                        stmt.executeUpdate();
+                        //model.removeRow(row);
+                        areaConteudo.revalidate();
+                        areaConteudo.repaint();
+                        }
+                        }catch (SQLException ex) {
+                        ex.printStackTrace();
+                        }
+                        }
                         });
                         }*/
                     }
@@ -550,7 +593,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             dispose();
             Login_Frame log = new Login_Frame();
             log.setVisible(true);
-            log.setSize(475,140);
+            //log.setSize(475,140);
             log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
     }//GEN-LAST:event_logoutActionPerformed
@@ -579,9 +622,42 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         jTextField1.setToolTipText("Insira aqui o nome do autor ou do livro.");
     }//GEN-LAST:event_jTextField1MouseEntered
 
-    private void ocorrenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocorrenciasActionPerformed
+    private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ocorrenciasActionPerformed
+        if(evt.getSource()== usuarios){
+            areaConteudo.removeAll();
+            try{
+                MysqlDataSource dataSource = new MysqlDataSource();
+                dataSource.setUser("root");
+                dataSource.setPassword("");     
+                dataSource.setDatabaseName("biblioteca");
+                dataSource.setServerName("localhost"); 
+                Connection conn = dataSource.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet result = stmt.executeQuery("SELECT Nome,Matrícula,Emprestados,Situacao FROM usuários");
+                lista_livros.jTable1 = new JTable(buildTableModel(result));
+                //lista_livros.jTable1.setFocusable(false);
+                lista_livros.jTable1.setRowSelectionAllowed(true);
+                lista_livros.jTable1.setForeground(new Color(9,22,214));
+                
+               
+                conn.close();   
+                
+                acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
+                acervo_header.setVerticalAlignment(SwingConstants.CENTER);
+                acervo_header.setText("Obras cadastradas: "); 
+            }catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro");
+                    ex.printStackTrace();
+            }
+            finally{
+                lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
+                areaConteudo.setLayout(new FlowLayout());
+                areaConteudo.add(lista_livros); 
+            } 
+            areaConteudo.revalidate();
+        }
+    }//GEN-LAST:event_usuariosActionPerformed
 
     private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
         // TODO add your handling code here:
@@ -711,6 +787,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JButton logout;
     private javax.swing.JButton ocorrencias;
     private javax.swing.JButton pesquisar;
+    private javax.swing.JButton usuarios;
     // End of variables declaration//GEN-END:variables
 
 }

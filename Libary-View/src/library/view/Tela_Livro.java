@@ -6,8 +6,18 @@
 
 package library.view;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import java.awt.Color;
 import java.awt.Window;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import static library.view.Home_Screen_Adm.buildTableModel;
 
 /**
  *
@@ -40,7 +50,7 @@ public class Tela_Livro extends javax.swing.JFrame {
         codigo = new javax.swing.JTextField();
         localizacao = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        empresta = new javax.swing.JButton();
         disponibilidade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,12 +72,22 @@ public class Tela_Livro extends javax.swing.JFrame {
         );
 
         editora.setText("Editora");
+        editora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editoraActionPerformed(evt);
+            }
+        });
 
         autor.setText("Autor");
 
         ano.setText("Ano");
 
         assunto.setText("Assunto");
+        assunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assuntoActionPerformed(evt);
+            }
+        });
 
         codigo.setText("Código");
 
@@ -80,9 +100,19 @@ public class Tela_Livro extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Emprestar");
+        empresta.setText("Emprestar");
+        empresta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emprestaActionPerformed(evt);
+            }
+        });
 
         disponibilidade.setText("Disponibilidade");
+        disponibilidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disponibilidadeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,13 +121,11 @@ public class Tela_Livro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(89, 89, 89)
-                        .addComponent(titulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(autor, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -109,15 +137,16 @@ public class Tela_Livro extends javax.swing.JFrame {
                                 .addComponent(assunto))
                             .addComponent(codigo)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(localizacao)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jButton2)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(localizacao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(disponibilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(disponibilidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 146, Short.MAX_VALUE))
+                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(empresta)
+                .addGap(84, 84, 84))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +173,7 @@ public class Tela_Livro extends javax.swing.JFrame {
                             .addComponent(localizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(disponibilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(21, 21, 21)
-                .addComponent(jButton2)
+                .addComponent(empresta)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -155,6 +184,50 @@ public class Tela_Livro extends javax.swing.JFrame {
         Window dialog = SwingUtilities.windowForComponent(jButton1);
         dialog.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void emprestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emprestaActionPerformed
+        // TODO add your handling code here:
+        if(evt.getSource()==empresta){
+                try{
+                MysqlDataSource dataSource = new MysqlDataSource();
+                dataSource.setUser("root");
+                dataSource.setPassword("");     
+                dataSource.setDatabaseName("biblioteca");
+                dataSource.setServerName("localhost"); 
+                Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("SELECT Disponibilidade FROM acervo WHERE Título = ?");
+                stmt.setString(1, titulo.getText());
+                ResultSet result = stmt.executeQuery();
+                while(result.next()){
+                    if(result.getString("Disponibilidade").equals("Disponível")){
+                        PreparedStatement altera = conn.prepareStatement("UPDATE acervo SET Disponibilidade = ? WHERE Título = ?");
+                        altera.setString(1,"Indisponível");
+                        altera.setString(2,titulo.getText());
+                        altera.executeUpdate();
+                        JOptionPane.showMessageDialog(null,"Sucesso","Emprestar",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Esta obra está indisponível no momento","Emprestar",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+             }catch(SQLException ex){
+                 
+              ex.printStackTrace();  
+         }    
+        }
+    }//GEN-LAST:event_emprestaActionPerformed
+
+    private void editoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editoraActionPerformed
+
+    private void disponibilidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disponibilidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_disponibilidadeActionPerformed
+
+    private void assuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assuntoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_assuntoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,6 +260,7 @@ public class Tela_Livro extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Tela_Livro().setVisible(true);
+                
             }
         });
     }
@@ -198,8 +272,8 @@ public class Tela_Livro extends javax.swing.JFrame {
     protected javax.swing.JTextField codigo;
     protected javax.swing.JTextField disponibilidade;
     protected javax.swing.JTextField editora;
+    private javax.swing.JButton empresta;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     protected javax.swing.JTextField localizacao;
     protected javax.swing.JLabel titulo;
