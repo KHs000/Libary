@@ -5,6 +5,8 @@
  */
 package library.view;
 
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -18,6 +20,11 @@ public class Tela_Ajuda extends javax.swing.JFrame {
      */
     public Tela_Ajuda() {
         initComponents();
+        this.setTitle("Sistema de Bibliotecas Columba  - Tela de Ajuda");   
+        URL iconURL = getClass().getResource("/org/me/myimageapp/resources/help_icon.png");
+        // iconURL is null when not found
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
     }
 
     /**

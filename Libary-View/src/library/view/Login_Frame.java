@@ -6,11 +6,16 @@
 package library.view;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import java.awt.Color;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +29,12 @@ public class Login_Frame extends javax.swing.JFrame {
      */
     public Login_Frame() {
         initComponents();
+        this.setTitle("Sistema de Bibliotecas Columba - Login");   
+        URL iconURL = getClass().getResource("/org/me/myimageapp/resources/login_icon.png");
+        // iconURL is null when not found
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
+        //this.setBackground(new Color(72,72,72));
     }
 
     /**
@@ -148,10 +159,11 @@ public class Login_Frame extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Logado");
                         dispose();
                         Home_Screen_Adm adm = new Home_Screen_Adm(fieldlogin.getText()); 
+
                         adm.setVisible(true);
                         adm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     }
-                }catch(SQLException ex){
+                } catch(SQLException ex){
                     ex.printStackTrace();
                 }     
             }

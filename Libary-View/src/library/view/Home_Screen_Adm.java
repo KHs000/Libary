@@ -17,6 +17,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -37,17 +38,34 @@ import javax.swing.table.DefaultTableModel;
  * @author Aluno
  */
 public class Home_Screen_Adm extends javax.swing.JFrame {
-    Lista_Livros lista_livros = new Lista_Livros ();    
-            
+    Lista_Livros lista_livros = new Lista_Livros ();         
     /**
      * Creates new form Home_Screen
      */
     public Home_Screen_Adm(){
-        initComponents();
+        initComponents();   
+        this.setTitle("Sistema de Bibliotecas Columba - Admnistrador");   
+        URL iconURL = getClass().getResource("/org/me/myimageapp/resources/lib_icon.png");
+       // URL searchButton = getClass().getResource("/org/me/myimageapp/resources/search_icon.png");
+        // iconURL is null when not found
+        ImageIcon icon = new ImageIcon(iconURL);
+        //ImageIcon searchIcon = new ImageIcon(searchButton);
+        //this.pesquisar.setIcon(searchIcon);
+        this.setIconImage(icon.getImage());
+        this.getContentPane().setBackground(new Color(0,0,204,63));
     }
-    public Home_Screen_Adm(String name) {
+    public Home_Screen_Adm(String name) { 
         initComponents();
-        jLabel1.setText("Bem vindo "+name+"!");
+        jLabel1.setText("Bem vindo "+name+"!");   
+        this.setTitle("Sistema de Bibliotecas Columba - Admnistrador");   
+        URL iconURL = getClass().getResource("/org/me/myimageapp/resources/lib_icon.png");
+        // iconURL is null when not found
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage()); 
+        this.getContentPane().setBackground(new Color(59,106,176));
+       
+        //this.areaConteudo.setBackground(Color.ORANGE);
+        
     }
 
     /**
@@ -65,7 +83,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         areaConteudo = new javax.swing.JPanel();
         adm_profile = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tela_pesq_comp = new javax.swing.JButton();
         acervo = new javax.swing.JButton();
         usuarios = new javax.swing.JButton();
         cadastrar_obra = new javax.swing.JButton();
@@ -77,7 +95,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         logout = new javax.swing.JButton();
         ajuda = new javax.swing.JButton();
         acervo_header = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        foto_admin = new javax.swing.JPanel();
         ocorrencias = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
@@ -85,11 +103,16 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         jTextField4.setText("jTextField4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 0, 204));
+        setBackground(new java.awt.Color(204, 204, 204));
+        setForeground(new java.awt.Color(51, 51, 255));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bem vindo Nome!");
 
+        jScrollPane1.setBorder(null);
+
+        areaConteudo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         areaConteudo.setEnabled(false);
         areaConteudo.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -122,10 +145,10 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Pesquisa Composta");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        tela_pesq_comp.setText("Pesquisa Composta");
+        tela_pesq_comp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                tela_pesq_compActionPerformed(evt);
             }
         });
 
@@ -173,8 +196,10 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Copyright © 2015 Columba");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("All Rights Reserved");
 
         logout.setText("Logout");
@@ -189,6 +214,9 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ajudaMouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ajudaMouseExited(evt);
+            }
         });
         ajuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,17 +226,26 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
         acervo_header.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 153));
+        foto_admin.setBackground(new java.awt.Color(250, 250, 250));
+        foto_admin.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        foto_admin.setForeground(new java.awt.Color(0, 0, 153));
+        foto_admin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                foto_adminMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                foto_adminMouseExited(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout foto_adminLayout = new javax.swing.GroupLayout(foto_admin);
+        foto_admin.setLayout(foto_adminLayout);
+        foto_adminLayout.setHorizontalGroup(
+            foto_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        foto_adminLayout.setVerticalGroup(
+            foto_adminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 155, Short.MAX_VALUE)
         );
 
@@ -219,28 +256,26 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(acervo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(adm_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tela_pesq_comp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ajuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(foto_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(acervo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(adm_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ajuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 10, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cadastrar_obra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(ocorrencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ocorrencias, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(cadastrar_obra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -268,32 +303,29 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(foto_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addGap(35, 35, 35)
                         .addComponent(adm_profile)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(tela_pesq_comp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(acervo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(usuarios)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addGap(126, 126, 126))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(ocorrencias)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(4, 4, 4)
                                 .addComponent(cadastrar_obra)
                                 .addGap(1, 1, 1)
                                 .addComponent(ajuda)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(logout)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(logout)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)))
@@ -353,7 +385,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 //lista_livros.jTable1.setFocusable(false);
                 lista_livros.jTable1.setRowSelectionAllowed(true);
                 lista_livros.jTable1.setForeground(new Color(9,22,214));
-                
+                //lista_livros.jScrollPane1.setBackground(Color.red);
                 //System.out.println(result.getString("Disponibilidade"));
                 
                 MouseListener rightEvt;
@@ -406,35 +438,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                                     }catch (SQLException ex) {
                                         ex.printStackTrace();
                                     }
-                                    
-                                    /*lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                                    
-                                    @Override
-                                    public void valueChanged(ListSelectionEvent e) {
-                                    int row = lista_livros.jTable1.getSelectedRow();
-                                    DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
-                                    String selected = model.getValueAt(row,0).toString();
-                                    
-                                    try{
-                                    MysqlDataSource dataSource = new MysqlDataSource();
-                                    dataSource.setUser("root");
-                                    dataSource.setPassword("");     
-                                    dataSource.setDatabaseName("biblioteca");
-                                    dataSource.setServerName("localhost"); 
-                                    Connection conn = dataSource.getConnection();
 
-                                    if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
-                                    PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
-                                    stmt.setString(1,selected);
-                                    stmt.executeUpdate();
-                                    areaConteudo.revalidate();
-                                    areaConteudo.repaint();
-                                    }
-                                    }catch (SQLException ex) {
-                                    ex.printStackTrace();
-                                    }
-                                    }
-                                    }); */
                                 }
                             });
                             popup.add(del);
@@ -450,6 +454,27 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                                     Tela_Livro book = new Tela_Livro ();
                                     book.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                     book.titulo.setText(selected);
+                                    try{
+                                        MysqlDataSource dataSource = new MysqlDataSource();
+                                        dataSource.setUser("root");
+                                        dataSource.setPassword("");
+                                        dataSource.setDatabaseName("biblioteca");
+                                        dataSource.setServerName("localhost");
+                                        Connection conn = dataSource.getConnection();
+                                        PreparedStatement p = conn.prepareStatement("SELECT Autor,Editora,Ano,Assunto,Código,Disponibilidade FROM ACERVO WHERE Título = ?");
+                                        p.setString(1,selected);
+                                        ResultSet rs = p.executeQuery();
+                                        while(rs.next()){
+                                            book.autor.setText(rs.getString("Autor"));
+                                            book.editora.setText(rs.getString("Editora"));
+                                            book.ano.setText(rs.getString("Ano"));
+                                            book.assunto.setText(rs.getString("Assunto"));
+                                            book.codigo.setText(rs.getString("Código"));
+                                            book.disponibilidade.setText(rs.getString("Disponibilidade"));
+                                        }
+                                    }catch(SQLException ex){
+                                        ex.printStackTrace();
+                                    }
                                     //JOptionPane.showMessageDialog(null, book);
                                     book.setVisible(true);
     
@@ -560,14 +585,16 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 dataSource.setDatabaseName("biblioteca");
                 dataSource.setServerName("localhost"); 
                 Connection conn = dataSource.getConnection();
-                //PreparedStatement stmt = conn.prepareStatement("SELECT Login,Senha,Email,Telefone FROM admin WHERE Login = ?");
-                //stmt.setString(1,jLabel1.getText().substring(10,jLabel1.getText().length()-1));
-                //ResultSet rs = stmt.executeQuery();
-                //System.out.println(rs.getString("Email")); 
-                //profile.chg_name.setText(rs.getString("Login"));
-                //profile.chg_pass.setText(rs.getString("Senha"));
-                //profile.chg_mail.setText(rs.getString("Email"));
-                //profile.chg_mail.setText(rs.getString("Telefone"));
+                PreparedStatement stmt = conn.prepareStatement("SELECT Login,Senha,Email,Telefone FROM admin WHERE Login = ?");
+                stmt.setString(1,jLabel1.getText().substring(10,jLabel1.getText().length()-1));
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
+                    profile.chg_name.setText(rs.getString("Login"));
+                    profile.chg_pass.setText(rs.getString("Senha"));  
+                    profile.chg_mail.setText(rs.getString("Email"));
+                    profile.chg_phone.setText(rs.getString("Telefone"));
+                }     
+               
             }catch(SQLException ex){
                 ex.printStackTrace();
             }
@@ -598,9 +625,9 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_logoutActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void tela_pesq_compActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tela_pesq_compActionPerformed
         // TODO add your handling code here:
-        if(evt.getSource() == jButton2){
+        if(evt.getSource() == tela_pesq_comp){
             Pesquisa_Composta_Adm pq = new Pesquisa_Composta_Adm();
             pq.setVisible(true);
             pq.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -615,7 +642,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_tela_pesq_compActionPerformed
 
     private void jTextField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseEntered
         // TODO add your handling code here:
@@ -645,7 +672,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 
                 acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
                 acervo_header.setVerticalAlignment(SwingConstants.CENTER);
-                acervo_header.setText("Obras cadastradas: "); 
+                acervo_header.setText("Usuários cadastrados: "); 
             }catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Erro");
                     ex.printStackTrace();
@@ -679,25 +706,26 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 stmt.setString(1,"%"+jTextField1.getText()+"%");
                 stmt.setString(2,"%"+jTextField1.getText()+"%");
                 ResultSet result = stmt.executeQuery();
-                lista_livros.jTable1 = new JTable(buildTableModel(result));
-                conn.close();
-                acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
-                acervo_header.setVerticalAlignment(SwingConstants.CENTER);
-                lista_livros.jTable1.setFocusable(false);
-                lista_livros.jTable1.setRowSelectionAllowed(true);
-                lista_livros.jTable1.setForeground(new Color(255,0,128));     //Boa cor para livro já pego
-                acervo_header.setText("Obras selecionadas: ");
-           
+                if(!result.isBeforeFirst()){
+                    JOptionPane.showMessageDialog(null,"Não existem resultados ao pesquisar no acervo.","Sem resultados",JOptionPane.INFORMATION_MESSAGE);
+                } else{
+                    lista_livros.jTable1 = new JTable(buildTableModel(result));
+                    acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
+                    acervo_header.setVerticalAlignment(SwingConstants.CENTER);
+                    lista_livros.jTable1.setFocusable(false);
+                    lista_livros.jTable1.setRowSelectionAllowed(true);
+                    lista_livros.jTable1.setForeground(new Color(255,0,128));     //Boa cor para livro já pego
+                    acervo_header.setText("Obras selecionadas: ");
+                    lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
+                    areaConteudo.setLayout(new FlowLayout());
+                    areaConteudo.add(lista_livros);
                 
+                }
+              
                 conn.close();
                 }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro");
                     ex.printStackTrace();
-                }
-                finally{
-                    lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
-                    areaConteudo.setLayout(new FlowLayout());
-                    areaConteudo.add(lista_livros);
                 }
             }
             areaConteudo.revalidate();
@@ -715,22 +743,37 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private void ajudaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ajudaMouseEntered
         // TODO add your handling code here:
         if(evt.getSource()== ajuda){
-            
+            //ajuda.setBackground(new Color(98,98,98));
         }
         
     }//GEN-LAST:event_ajudaMouseEntered
 
-    private void areaConteudoComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_areaConteudoComponentAdded
-        // TODO add your handling code here:
-        //if(evt.getSource() == lista_livros.jTable1){
-        //int row = lista_livros.jTable1.getSelectedRow();
-        //JOptionPane.showMessageDialog(areaConteudo, row,"d",JOptionPane.INFORMATION_MESSAGE);
-        //}
-    }//GEN-LAST:event_areaConteudoComponentAdded
-
     private void areaConteudoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaConteudoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_areaConteudoMouseClicked
+
+    private void areaConteudoComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_areaConteudoComponentAdded
+        // TODO add your handling code here:
+                        //int row = lista_livros.jTable1.getSelectedRow();
+            //JOptionPane.showMessageDialog(areaConteudo, row,"d",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_areaConteudoComponentAdded
+
+    private void foto_adminMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_foto_adminMouseEntered
+        // TODO add your handling code here:
+        foto_admin.setBackground(new Color(72,72,72));
+    }//GEN-LAST:event_foto_adminMouseEntered
+
+    private void foto_adminMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_foto_adminMouseExited
+        // TODO add your handling code here:
+        foto_admin.setBackground(new Color(250,250,250));
+    }//GEN-LAST:event_foto_adminMouseExited
+
+    private void ajudaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ajudaMouseExited
+        // TODO add your handling code here:
+        if(evt.getSource()==ajuda){
+            //ajuda.setBackground(new Color(240,240,240));
+        }
+    }//GEN-LAST:event_ajudaMouseExited
 //
     /**
      * @param args the command line arguments
@@ -743,7 +786,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows Classic".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }                
@@ -774,12 +817,11 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JButton ajuda;
     protected javax.swing.JPanel areaConteudo;
     private javax.swing.JButton cadastrar_obra;
-    private javax.swing.JButton jButton2;
+    protected javax.swing.JPanel foto_admin;
     protected javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
@@ -787,6 +829,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JButton logout;
     private javax.swing.JButton ocorrencias;
     private javax.swing.JButton pesquisar;
+    private javax.swing.JButton tela_pesq_comp;
     private javax.swing.JButton usuarios;
     // End of variables declaration//GEN-END:variables
 

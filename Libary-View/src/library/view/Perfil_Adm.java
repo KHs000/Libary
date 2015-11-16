@@ -26,6 +26,7 @@ public class Perfil_Adm extends javax.swing.JPanel {
     public Perfil_Adm(String name) {
         initComponents();
         chg_name.setText(name);
+        
     }
     public Perfil_Adm(){
         initComponents();
@@ -47,7 +48,6 @@ public class Perfil_Adm extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         chg_name = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        chg_pass = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         chg_mail = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -64,6 +64,7 @@ public class Perfil_Adm extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         back2home = new javax.swing.JButton();
+        chg_pass = new javax.swing.JTextField();
 
         jLabel1.setText("Nome");
 
@@ -193,6 +194,8 @@ public class Perfil_Adm extends javax.swing.JPanel {
             }
         });
 
+        chg_pass.setText("jTextField1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -232,8 +235,8 @@ public class Perfil_Adm extends javax.swing.JPanel {
                             .addComponent(change_data_button))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(chg_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(chg_phone))
+                            .addComponent(chg_phone, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(chg_pass))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -337,13 +340,13 @@ public class Perfil_Adm extends javax.swing.JPanel {
                     dataSource.setDatabaseName("biblioteca");
                     dataSource.setServerName("localhost"); 
                     Connection conn = dataSource.getConnection();
-                    /*
+                    
                     PreparedStatement stmt = conn.prepareStatement("UPDATE admin SET Login = ?, Senha = ?, Email = ?, Telefone = ?");
                     stmt.setString(1, chg_name.getText());
                     stmt.setString(2,chg_pass.getText());
                     stmt.setString(3,chg_mail.getText());
                     stmt.setString(4,chg_phone.getText());
-                    stmt.executeUpdate(); */
+                    stmt.executeUpdate();
                 }   
             }catch(SQLException ex){
                 ex.printStackTrace();

@@ -9,11 +9,13 @@ package library.view;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.awt.Color;
 import java.awt.Window;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -30,6 +32,11 @@ public class Tela_Livro extends javax.swing.JFrame {
      */
     public Tela_Livro() {
         initComponents();
+        this.setTitle("Sistema de Bibliotecas Columba - Admnistrador");   
+        URL iconURL = getClass().getResource("/org/me/myimageapp/resources/lib_icon.png");
+        // iconURL is null when not found
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
     }
 
     /**
@@ -41,6 +48,7 @@ public class Tela_Livro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToolBar1 = new javax.swing.JToolBar();
         titulo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         editora = new javax.swing.JTextField();
@@ -52,6 +60,8 @@ public class Tela_Livro extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         empresta = new javax.swing.JButton();
         disponibilidade = new javax.swing.JTextField();
+
+        jToolBar1.setRollover(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,6 +91,11 @@ public class Tela_Livro extends javax.swing.JFrame {
         autor.setText("Autor");
 
         ano.setText("Ano");
+        ano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anoActionPerformed(evt);
+            }
+        });
 
         assunto.setText("Assunto");
         assunto.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +147,7 @@ public class Tela_Livro extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(editora, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(ano, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ano, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(assunto))
                             .addComponent(codigo)
@@ -229,6 +244,10 @@ public class Tela_Livro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_assuntoActionPerformed
 
+    private void anoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_anoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -275,6 +294,7 @@ public class Tela_Livro extends javax.swing.JFrame {
     private javax.swing.JButton empresta;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JToolBar jToolBar1;
     protected javax.swing.JTextField localizacao;
     protected javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables

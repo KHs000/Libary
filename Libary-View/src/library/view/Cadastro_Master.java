@@ -7,13 +7,21 @@
 package library.view;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -175,7 +183,27 @@ public class Cadastro_Master extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+  /*  private void saveImage(String imageUrl, String destinationFile) 
+    {
+        try{
+            URL url = new URL(imageUrl);
+            InputStream is = url.openStream();
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(destinationFile)));
 
+            byte[] b = new byte[2048];
+            int length;
+
+            while ((length = is.read(b)) != -1) 
+            {
+                bos.write(b, 0, length);
+            }
+
+            is.close();
+            bos.close();
+        } catch(Exception ex){
+          ex.printStackTrace();
+        }
+    } */
     private void admin_photo_pickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_admin_photo_pickerActionPerformed
         // TODO add your handling code here:
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -189,6 +217,7 @@ public class Cadastro_Master extends javax.swing.JFrame {
             String x = null;
             try {
                 x = chooser.getSelectedFile().toURL()+"\\";
+                //saveImage(x,"resources");
             } catch (MalformedURLException ex) {
                 Logger.getLogger(Cadastro_Livro.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -212,7 +241,7 @@ public class Cadastro_Master extends javax.swing.JFrame {
                 stmt.setString(2, master_nickname.getText());
                 stmt.setString(3, master_password.getText());
                 stmt.setString(4, emailfield.getText());
-                stmt.setString(5, telephonefield.getText());
+                stmt.setString(5, telephonefield.getText()); 
                 stmt.executeUpdate();
                 
                 JOptionPane.showMessageDialog(null,"Admnistrador cadastrado com sucesso","Cadastro",JOptionPane.INFORMATION_MESSAGE);

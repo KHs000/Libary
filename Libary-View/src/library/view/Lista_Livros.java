@@ -98,14 +98,15 @@ public class Lista_Livros extends javax.swing.JPanel {
 
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
         // TODO add your handling code here:
+        //jTable1.setBackground(new Color(72,72,72));
     }//GEN-LAST:event_jTable1MouseEntered
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here
         //JOptionPane.showMessageDialog(null, jScrollPane1, "sfdghfgdsa", JOptionPane.INFORMATION_MESSAGE);
-        jTable1.getComponents();
-        int row = jTable1.getSelectedRow();
-        JOptionPane.showMessageDialog(null, row,"teste",JOptionPane.INFORMATION_MESSAGE);
+        //jTable1.getComponents();
+       // int row = jTable1.getSelectedRow();
+       // JOptionPane.showMessageDialog(null, row,"teste",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jTable1ComponentAdded
