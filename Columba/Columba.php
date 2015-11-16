@@ -28,9 +28,9 @@ echo'<html>
 	</div>
 	<div class="header">
 		<h1 class="page-title">COLUMBA</h1>
-		<form>
+		<form action="search.php" method="POST">
 			<input type="text" name="livro" placeholder="Pesquise o livro" size="50" class="text">
-			<input type="submit" value="Enviar" class="botao">
+			<input type="submit" value="Enviar" class="botao" name="submitSimple">
 		</form>
 		
 	</div>
