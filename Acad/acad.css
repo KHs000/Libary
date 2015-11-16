@@ -1,0 +1,59 @@
+/* sobrescrição de visual2.css */
+h1 {
+  margin: 0.5em;
+}
+
+#content {
+    padding-bottom: 100px; 
+    z-index: -1;
+}
+/* sobrescrição de visual2.css */
+
+.campo {
+  width: 100%;
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+  height: 25px;
+  padding: 5px;
+}
+
+/* button */
+.button { 
+    display: block;
+    min-height: 50px;
+    min-width: 100px;
+    margin: auto;
+    padding: 2px;
+    border: solid 2px #fff; 
+    line-height: 30px;
+    background-color: #00376a;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.8em;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #2b529c;
+}
+/* button */
+
+/* link de redirecionamento */
+.divredir {
+  text-align: center;
+}
+
+.redir {
+  text-decoration: none;
+  font-weight: bold;
+  color: #00376a;
+}
+
+.redir:hover {
+  color: #2b529c;
+}
+/* link de redirecionamento */
+
+.info {
+  font-size: 1.5em;
+}
