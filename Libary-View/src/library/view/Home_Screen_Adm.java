@@ -339,6 +339,8 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private void acervoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acervoActionPerformed
         if (evt.getSource() == acervo) {
             areaConteudo.removeAll();
+            areaConteudo.setFocusCycleRoot(true);
+            areaConteudo.setFocusable(true);
             try{
                 MysqlDataSource dataSource = new MysqlDataSource();
                 dataSource.setUser("root");
@@ -356,13 +358,12 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 
                 //System.out.println(result.getString("Disponibilidade"));
                 
-                MouseListener rightEvt;
-                rightEvt = new MouseListener () {
+                MouseListener rightEvt = new MouseListener () {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (SwingUtilities.isRightMouseButton(e)) {
                             JPopupMenu popup = new JPopupMenu();
-                            
+                                                               
                             class PopupListener extends MouseAdapter {
                                 @Override
                                 public void mousePressed(MouseEvent e) {
@@ -402,39 +403,11 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                                             stmt.executeUpdate();
                                             areaConteudo.revalidate();
                                             areaConteudo.repaint();
+                                            row = 0;
                                         }
                                     }catch (SQLException ex) {
                                         ex.printStackTrace();
                                     }
-                                    
-                                    /*lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                                    
-                                    @Override
-                                    public void valueChanged(ListSelectionEvent e) {
-                                    int row = lista_livros.jTable1.getSelectedRow();
-                                    DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
-                                    String selected = model.getValueAt(row,0).toString();
-                                    
-                                    try{
-                                    MysqlDataSource dataSource = new MysqlDataSource();
-                                    dataSource.setUser("root");
-                                    dataSource.setPassword("");     
-                                    dataSource.setDatabaseName("biblioteca");
-                                    dataSource.setServerName("localhost"); 
-                                    Connection conn = dataSource.getConnection();
-
-                                    if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
-                                    PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
-                                    stmt.setString(1,selected);
-                                    stmt.executeUpdate();
-                                    areaConteudo.revalidate();
-                                    areaConteudo.repaint();
-                                    }
-                                    }catch (SQLException ex) {
-                                    ex.printStackTrace();
-                                    }
-                                    }
-                                    }); */
                                 }
                             });
                             popup.add(del);
@@ -443,62 +416,22 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                             rent.addActionListener(new ActionListener () {
                                 @Override
                                 public void actionPerformed(ActionEvent evt) {
-                                    int row = lista_livros.jTable1.rowAtPoint(e.getPoint());
+                                    int row = 0;
+                                    row = lista_livros.jTable1.rowAtPoint(e.getPoint());
                                     DefaultTableModel model = (DefaultTableModel)lista_livros.jTable1.getModel();
                                     String selected = model.getValueAt(row,0).toString();
 
                                     Tela_Livro book = new Tela_Livro ();
                                     book.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                                     book.titulo.setText(selected);
-                                    //JOptionPane.showMessageDialog(null, book);
                                     book.setVisible(true);
-    
                                 }
                             });
                             popup.add(rent);
                             
                             MouseListener popupListener = new PopupListener();
                             lista_livros.jTable1.addMouseListener(popupListener);
-                            
-                            /*int row = lista_livros.jTable1.rowAtPoint(e.getPoint());
-                            DefaultTableModel model = (DefaultTableModel)lista_livros.jTable1.getModel();
-                            String selected = (String) model.getValueAt(row,0);
-                            
-                            Tela_Livro book = new Tela_Livro ();
-                            
-                            book.titulo.setText(lista_livros.jTable1.getName());
-                            JOptionPane.showMessageDialog(null, selected);*/
                         }
-                        /*if (SwingUtilities.isLeftMouseButton(e)) {
-                        lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                        @Override
-                        public void valueChanged(ListSelectionEvent e) {
-                        int row = lista_livros.jTable1.getSelectedRow();
-                        DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
-                        String selected = model.getValueAt(row,0).toString();
-                        
-                        try{
-                        MysqlDataSource dataSource = new MysqlDataSource();
-                        dataSource.setUser("root");
-                        dataSource.setPassword("");
-                        dataSource.setDatabaseName("biblioteca");
-                        dataSource.setServerName("localhost");
-                        Connection conn = dataSource.getConnection();
-                        
-                        if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
-                        PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
-                        stmt.setString(1,selected);
-                        stmt.executeUpdate();
-                        //model.removeRow(row);
-                        areaConteudo.revalidate();
-                        areaConteudo.repaint();
-                        }
-                        }catch (SQLException ex) {
-                        ex.printStackTrace();
-                        }
-                        }
-                        });
-                        }*/
                     }
 
                     @Override
@@ -527,7 +460,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 
                 acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
                 acervo_header.setVerticalAlignment(SwingConstants.CENTER);
-                acervo_header.setText("Obras cadastradas: "); 
+                acervo_header.setText("Obras cadastradas: ");
             }catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Erro");
                     ex.printStackTrace();
@@ -535,12 +468,11 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             finally{
                 lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
                 areaConteudo.setLayout(new FlowLayout());
-                areaConteudo.add(lista_livros); 
-            } 
-            areaConteudo.revalidate();
+                areaConteudo.add(lista_livros);
+            }
         }
     }//GEN-LAST:event_acervoActionPerformed
-
+   
     private void cadastrar_obraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrar_obraActionPerformed
         if(evt.getSource() == cadastrar_obra){
             Cadastro_Livro livro = new Cadastro_Livro();
