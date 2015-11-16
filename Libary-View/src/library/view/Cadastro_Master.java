@@ -7,6 +7,7 @@
 package library.view;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,13 +33,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Cadastro_Master extends javax.swing.JFrame {
     private JFileChooser chooser = new JFileChooser();
-    /**
-     * Creates new form Cadastro_Master
-     */
+
+    String text;
     public Cadastro_Master() {
+        this.text = jTextField1.getText();
         initComponents();
     }
-
+    private void save(BufferedImage image, String ext) {
+        File file = new File(text.substring(89,text.length()-1));
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -236,7 +240,7 @@ public class Cadastro_Master extends javax.swing.JFrame {
                 dataSource.setDatabaseName("biblioteca");
                 dataSource.setServerName("localhost"); 
                 Connection conn = dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("INSERT INTO admin (Nome,Login,Senha,Email,Telefone) VALUES (?,?,?,?,?)");
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO admin (Nome,Login,Senha,Email,Telefone,) VALUES (?,?,?,?,?)");
                 stmt.setString(1, master.getText());
                 stmt.setString(2, master_nickname.getText());
                 stmt.setString(3, master_password.getText());

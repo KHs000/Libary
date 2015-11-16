@@ -58,8 +58,6 @@ public class Cadastro_Livro extends javax.swing.JFrame {
         year = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cod = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        photo_picker = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         confirma = new javax.swing.JButton();
         p_reservadas = new javax.swing.JTextField();
@@ -67,10 +65,9 @@ public class Cadastro_Livro extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         subgenero = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
         cadastra_novo = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        campus = new javax.swing.JTextField();
+        campus = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,16 +111,6 @@ public class Cadastro_Livro extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setText("Foto:");
-
-        photo_picker.setText("Escolher foto");
-        photo_picker.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                photo_pickerActionPerformed(evt);
-            }
-        });
-
         confirma.setText("Confirmar");
         confirma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,12 +136,6 @@ public class Cadastro_Livro extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jTextField1MouseEntered(evt);
-            }
-        });
-
         cadastra_novo.setText("Cadastrar outra obra");
         cadastra_novo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +145,8 @@ public class Cadastro_Livro extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("Campus:");
+
+        campus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "I", "II", "VI" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,9 +161,7 @@ public class Cadastro_Livro extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel11)))
+                            .addComponent(jLabel10)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel9)))
@@ -208,22 +189,22 @@ public class Cadastro_Livro extends javax.swing.JFrame {
                             .addComponent(subgenero))
                         .addGap(41, 41, 41))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(campus, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(photo_picker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(40, Short.MAX_VALUE))))
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel1)
+                        .addContainerGap(173, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(289, 289, 289)
-                        .addComponent(jSeparator1))
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(158, 158, 158)
+                                .addComponent(jSeparator1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(campus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jSeparator2))
@@ -268,26 +249,20 @@ public class Cadastro_Livro extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(subgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(photo_picker)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(campus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cadastra_novo)
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(confirma)
-                        .addContainerGap())))
+                        .addGap(11, 11, 11))
+                    .addComponent(confirma, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -310,21 +285,9 @@ public class Cadastro_Livro extends javax.swing.JFrame {
             String codigo = cod.getText();;
             String reservadas = p_reservadas.getText();
             String subgeneros = subgenero.getText();
+            String local = campus.getSelectedItem().toString();
             //boolean cadastro = true;
          
-        try{
-
-        URL url = new URL(jTextField1.getText());
-        Image image = ImageIO.read(url);
-        }
-        catch(NumberFormatException | NullPointerException e){
-            e.getMessage();
-            JOptionPane p = new JOptionPane("teste");
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Cadastro_Livro.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Cadastro_Livro.class.getName()).log(Level.SEVERE, null, ex);
-        }
         try{          
             MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setUser("root");
@@ -334,9 +297,9 @@ public class Cadastro_Livro extends javax.swing.JFrame {
             Connection conn = dataSource.getConnection();
             Statement stmt = conn.createStatement();     
 
-            stmt.executeUpdate("INSERT INTO acervo(Título,Autor,Editora,Assunto,Ano,Código,Palavra_Reservada,Subgêneros)"+
+            stmt.executeUpdate("INSERT INTO acervo(Título,Autor,Editora,Assunto,Ano,Código,Palavra_Reservada,Subgêneros,Campus)"+
                        "VALUES ('"+titulo+"','"+autor+"','"+editora+"','"+Assunto+"','"+ano+"','"+codigo+"','"+reservadas+"','"
-                       +subgeneros+"')");
+                       +subgeneros+"','"+local+"')");
             JOptionPane.showMessageDialog(null,"Livro cadastrado com sucesso","Cadastro",JOptionPane.INFORMATION_MESSAGE);
             conn.close();   
         }catch (SQLException ex) {
@@ -344,27 +307,6 @@ public class Cadastro_Livro extends javax.swing.JFrame {
                     ex.printStackTrace();
         }
     }//GEN-LAST:event_confirmaActionPerformed
-
-    private void photo_pickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photo_pickerActionPerformed
-        // TODO add your handling code here:
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        chooser.setCurrentDirectory(new java.io.File("."));
-        chooser.setDialogTitle("Selecione a imagem do livro");
-        chooser.setAcceptAllFileFilterUsed(false);
-   
-        FileNameExtensionFilter f = new FileNameExtensionFilter("Imagens","png","gif","jpg");
-        chooser.setFileFilter(f);
-        if(chooser.showOpenDialog(chooser)== JFileChooser.APPROVE_OPTION){
-            String x = null;
-            try {
-                x = chooser.getSelectedFile().toURL()+"\\";
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(Cadastro_Livro.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-            jTextField1.setText(x);
-     }
-    }//GEN-LAST:event_photo_pickerActionPerformed
 
     private void p_reservadasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_reservadasMouseEntered
         // TODO add your handling code here:
@@ -375,11 +317,6 @@ public class Cadastro_Livro extends javax.swing.JFrame {
         // TODO add your handling code here:
         subgenero.setToolTipText("Separe os subgêneros por espaço");
     }//GEN-LAST:event_subgeneroMouseEntered
-
-    private void jTextField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseEntered
-        // TODO add your handling code here:
-        jTextField1.setToolTipText("Aqui ficará o caminho da imagem escolhida.");
-    }//GEN-LAST:event_jTextField1MouseEntered
 
     private void cadastra_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastra_novoActionPerformed
         // TODO add your handling code here:
@@ -438,7 +375,7 @@ public class Cadastro_Livro extends javax.swing.JFrame {
     private javax.swing.JTextField assunto;
     private javax.swing.JTextField author;
     private javax.swing.JButton cadastra_novo;
-    private javax.swing.JTextField campus;
+    private javax.swing.JComboBox campus;
     private javax.swing.JTextField cod;
     private javax.swing.JButton confirma;
     private javax.swing.JTextField editor;
@@ -451,13 +388,10 @@ public class Cadastro_Livro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField p_reservadas;
-    private javax.swing.JButton photo_picker;
     private javax.swing.JTextField subgenero;
     private javax.swing.JTextField title;
     private javax.swing.JTextField year;

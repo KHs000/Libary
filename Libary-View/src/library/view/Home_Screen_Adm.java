@@ -60,7 +60,18 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         this.setTitle("Sistema de Bibliotecas Columba - Admnistrador");   
         URL iconURL = getClass().getResource("/org/me/myimageapp/resources/lib_icon.png");
         // iconURL is null when not found
+
+        //URL foto = getClass().getResource("/org/me/myimageapp/resources/bauxita.jpg");
+        
         ImageIcon icon = new ImageIcon(iconURL);
+        //ImageIcon fotinho = new ImageIcon(foto);
+        
+        //JLabel lab = new JLabel("",fotinho,JLabel.CENTER);
+        //foto_admin.setLayout(new BorderLayout());
+        //foto_admin.add(lab);
+        
+        
+        //JOptionPane.showMessageDialog(null,foto_admin.getComponents().getClass());
         this.setIconImage(icon.getImage()); 
         this.getContentPane().setBackground(new Color(59,106,176));
        
@@ -167,6 +178,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         });
 
         cadastrar_obra.setText("Manutenção Acervo");
+        cadastrar_obra.setPreferredSize(new java.awt.Dimension(61, 23));
         cadastrar_obra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrar_obraActionPerformed(evt);
@@ -262,20 +274,17 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                     .addComponent(acervo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adm_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tela_pesq_comp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ajuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(foto_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(ocorrencias, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cadastrar_obra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(ocorrencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cadastrar_obra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ajuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -314,18 +323,17 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                         .addComponent(acervo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(usuarios)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(ocorrencias)
-                                .addGap(4, 4, 4)
-                                .addComponent(cadastrar_obra)
-                                .addGap(1, 1, 1)
-                                .addComponent(ajuda)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(logout)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ocorrencias)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cadastrar_obra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ajuda)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logout)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)))
@@ -379,10 +387,11 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 dataSource.setServerName("localhost"); 
                 Connection conn = dataSource.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet result = stmt.executeQuery("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM acervo");
+                ResultSet result = stmt.executeQuery("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade,Campus FROM acervo");
                 //diegoResultSet m = stmt.executeQuery("SELECT Disponibilidade FROM acervo");
                 lista_livros.jTable1 = new JTable(buildTableModel(result));
                 //lista_livros.jTable1.setFocusable(false);
+                
                 lista_livros.jTable1.setRowSelectionAllowed(true);
                 lista_livros.jTable1.setForeground(new Color(9,22,214));
                 //lista_livros.jScrollPane1.setBackground(Color.red);
@@ -631,16 +640,6 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             Pesquisa_Composta_Adm pq = new Pesquisa_Composta_Adm();
             pq.setVisible(true);
             pq.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            try{
-                MysqlDataSource dataSource = new MysqlDataSource();
-                dataSource.setUser("root");
-                dataSource.setPassword("");     
-                dataSource.setDatabaseName("biblioteca");
-                dataSource.setServerName("localhost"); 
-                Connection conn = dataSource.getConnection();
-            }catch(SQLException ex){
-                ex.printStackTrace();
-            }
         }
     }//GEN-LAST:event_tela_pesq_compActionPerformed
 
@@ -732,6 +731,10 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pesquisarActionPerformed
 
+   // public void setTable(JTable table) {
+    //    lista_livros.jTable1 = table;
+    //}
+
     private void ajudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajudaActionPerformed
         // TODO add your handling code here:
         Tela_Ajuda aj = new Tela_Ajuda();
@@ -760,12 +763,12 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
 
     private void foto_adminMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_foto_adminMouseEntered
         // TODO add your handling code here:
-        foto_admin.setBackground(new Color(72,72,72));
+        //foto_admin.setBackground(new Color(72,72,72));
     }//GEN-LAST:event_foto_adminMouseEntered
 
     private void foto_adminMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_foto_adminMouseExited
         // TODO add your handling code here:
-        foto_admin.setBackground(new Color(250,250,250));
+        //foto_admin.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_foto_adminMouseExited
 
     private void ajudaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ajudaMouseExited
@@ -832,5 +835,15 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JButton tela_pesq_comp;
     private javax.swing.JButton usuarios;
     // End of variables declaration//GEN-END:variables
+
+    public void setTable(JTable table) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //lista_livros.jTable1 = table;
+        //lista_livros.setVisible(true);
+        areaConteudo.add(table);
+        areaConteudo.repaint();
+        areaConteudo.revalidate();
+        areaConteudo.setVisible(true);
+    }
 
 }

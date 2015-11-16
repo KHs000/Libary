@@ -33,6 +33,7 @@ public class Pesquisa_Composta_Adm extends javax.swing.JFrame {
      */
     public Pesquisa_Composta_Adm() {
         initComponents();
+        
     }
 
     /**
@@ -182,49 +183,130 @@ public class Pesquisa_Composta_Adm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void reserved_wordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserved_wordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_reserved_wordActionPerformed
 
     private void pesquisa_compostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisa_compostaActionPerformed
         // TODO add your handling code here:
-        if(evt.getSource()==evt){
+        if(evt.getSource()==pesquisa_composta){
+            //JOptionPane.showMessageDialog(null, "eghfjkgfw");
+            
+            String sql = "SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM acervo WHERE Autor LIKE ?"
+                    + "AND Título LIKE ?"
+                    + "AND Ano LIKE ?"
+                    + "AND Assunto LIKE ?"
+                    + "AND Palavra_Reservada LIKE ?";
             try{
-                if(!author.getText().equals("")){
-                    autor = author.getText();
-                }
-                if(!title.getText().equals("")){
-                    titulo =  title.getText();
-                }
-                if(!year.getText().equals("")){
-                    ano = year.getText();
-                }
-                if(!subject.getText().equals("")){
-                    assunto = subject.getText();
-                }
-                if(!reserved_word.getText().equals("")){
-                    palavra_reservada = reserved_word.getText();
-                }
                 MysqlDataSource dataSource = new MysqlDataSource();
                 dataSource.setUser("root");
                 dataSource.setPassword("");
                 dataSource.setDatabaseName("biblioteca");
                 dataSource.setServerName("localhost");
                 Connection conn = dataSource.getConnection();  
-                PreparedStatement stmt = conn.prepareStatement("SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM acervo WHERE Autor LIKE ?"+
-                    "AND Título LIKE ?"
-                   +"AND Ano LIKE ?"
-                   +"AND Assunto LIKE ?"
-                   +"AND Palavra_Reservada LIKE ? ;");
-                stmt.setString(1,"%"+author.getText()+"%");
-                stmt.setString(2,"%"+author.getText()+"%");
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, "%"+author.getText()+"%");
+                stmt.setString(2, "%"+title.getText()+"%");
+                stmt.setString(3, "%"+year.getText()+"%");
+                stmt.setString(4, "%"+subject.getText()+"%");
+                stmt.setString(5, "%"+reserved_word.getText()+"%");
+                /*
+                if(!author.getText().equals("")){
+                    autor = author.getText();
+                    sql += "Autor LIKE ?";
+                    conn.prepareStatement(sql);
+                    stmt.setString(1,"%"+autor+"%");
+                }
+                if(!title.getText().equals("")){
+                    titulo =  title.getText();
+                    if(author.getText().equals("")){
+                         sql += "Título LIKE ?";
+                         conn.prepareStatement(sql);
+                         stmt.setString(1,"%"+titulo+"%");
+                    }else{
+                        sql += " AND Título LIKE ?";
+                        conn.prepareStatement(sql);
+                        stmt.setString(2,"%"+titulo+"%");
+                    }
+                }
+                if(!year.getText().equals("")){
+                    ano = year.getText();
+                    if(author.getText().equals("") && title.getText().equals("")){
+                        sql += "Ano LIKE ?";
+                        conn.prepareStatement(sql);
+                        stmt.setString(1,"%"+ano+"%");
+                    }else{
+                        sql += " AND Ano LIKE ?";
+                        conn.prepareStatement(sql);
+                        if(title.getText().equals("")){
+                            stmt.setString(2, "%"+ano+"%");
+                        }else{
+                            stmt.setString(3,"%"+ano+"%");
+                        }
+                    }
+                }
+                if(!subject.getText().equals("")){
+                    assunto = subject.getText();
+                    if(author.getText().equals("") && title.getText().equals("") && year.getText().equals("")){
+                         sql += "Assunto LIKE ?";
+                    }else{
+                        sql += " AND Assunto LIKE ?";
+                        conn.prepareStatement(sql);
+                        if(title.getText().equals("") || year.getText().equals("") || author.getText().equals("")){
+                            stmt.setString(2,"%"+assunto+"%");
+                        }else if(author.getText().equals("") && title.getText().equals("") || author.getText().equals("") && year.getText().equals("") || title.getText().equals("") && year.getText().equals("")){
+                            stmt.setString(3, "%"+assunto+"%");
+                        }else{
+                            stmt.setString(4, "%"+assunto+"%"); //Olhar esta bosta depois
+                        }
+                    }
+                    
+                }
+                if(!reserved_word.getText().equals("")){
+                    palavra_reservada = reserved_word.getText();
+                    if(author.getText().equals("") && title.getText().equals("") && year.getText().equals("") && subject.getText().equals("")){
+                         sql += "Palavra_Reservada LIKE ?";
+                    }else{
+                        sql += " AND Palavra_Reservada LIKE ?";
+                        conn.prepareStatement(sql);
+                        if(title.getText().equals("") || year.getText().equals("") || author.getText().equals("")){
+                            stmt.setString(2,"%"+palavra_reservada+"%");
+                        }else if(author.getText().equals("") && title.getText().equals("") || author.getText().equals("") && year.getText().equals("") || title.getText().equals("") && year.getText().equals("") || author.getText().equals("") && subject.getText().equals("") || year.getText().equals("") && subject.getText().equals("") || title.getText().equals("") && subject.getText().equals("")){
+                            stmt.setString(3, "%"+palavra_reservada+"%");
+                        }else if(author.getText().equals("") && title.getText().equals("") && year.getText().equals("") || author.getText().equals("") && year.getText().equals("") && subject.getText().equals("") || title.getText().equals("") && author.getText().equals("") && subject.getText().equals("")){
+                            stmt.setString(4, "%"+palavra_reservada+"%"); //Olhar esta bosta depois
+                        }else{
+                            stmt.setString(5,"%"+palavra_reservada+"%");
+                        }
+                    }
+                } */
                 ResultSet result = stmt.executeQuery();
+                // areaConteudo.removeAll();
                 lista_livros.jTable1 = new JTable(buildTableModel(result));
-                //JOptionPane.showMessageDialoglirootPane, result);
+                //JOptionPane.showMessageDialog(null, "eghfjkgfw");
+                //o.setTable(lista_livros.jTable1);
+                JOptionPane.showMessageDialog(null,lista_livros.jTable1);
                 conn.close();
             }catch(SQLException ex){
                 ex.printStackTrace();
-            }
+            } 
+            /*
+            try{
+                MysqlDataSource dataSource = new MysqlDataSource();
+                dataSource.setUser("root");
+                dataSource.setPassword("");
+                dataSource.setDatabaseName("biblioteca");
+                dataSource.setServerName("localhost");
+                Connection conn = dataSource.getConnection();  
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM acervo");
+                ResultSet r = stmt.executeQuery();
+                lista_livros.jTable1 = new JTable(buildTableModel(r));
+                JOptionPane.showMessageDialog(null,lista_livros.jTable1);
+                conn.close();
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            } */
         }    
     }//GEN-LAST:event_pesquisa_compostaActionPerformed
 
