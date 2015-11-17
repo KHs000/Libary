@@ -1,4 +1,30 @@
 <?php
+
+$h_dir = $_SERVER["DOCUMENT_ROOT"]."inc/";
+include_once( $h_dir."database.biblioteca.inc.php" );
+
+session_start();
+
+$liv_id = isset($_SESSION["liv_id"]) ? $_SESSION["liv_id"] : "";
+$livro = new TDatabase_Acervo();
+
+$sql  = "SELECT * FROM acervo";
+$sql .= " WHERE liv_id = '".$liv_id."'";
+
+
+$result = $livro->query($sql);
+if ($result) {
+	$info = $livro->fetch($result);
+}
+$sql  = "SELECT * FROM local_acervo";
+$sql .= " WHERE liv_id = '".$liv_id."'";
+
+
+$result = $livro->query($sql);
+if ($result) {
+	$info2 = $livro->fetch($result);
+}
+
 echo'<html>
 	<head>
 		<meta charset="UTF-8">
@@ -65,22 +91,22 @@ echo'<html>
 			<table class="tabelalivro">
 				<tr>
 					<td rowspan="2">imagem</td>
-					<td colspan="2" >Nome do Livro</td>
+					<td colspan="2">'.$info['titulo'].'</td>
 				</tr>
 				<tr>
-					<td >Ano de Publicação</td>
-					<td> Editora </td>
+					<td >'.$info['ano_publicacao'].'</td>
+					<td>'.$info['editora'].'</td>
 				</tr>
 				<tr>
-					<td colspan="2">Autor</td>
-					<td >Genero</td>
+					<td colspan="2">'.$info['autor'].'</td>
+					<td >'.$info['assunto'].'</td>
 				</tr>
 
 				<tr>
-					<td colspan="3">Campus e Localização completa</td>
+					<td colspan="3">'.$info2['campus'].'</td>
 				</tr>
 				<tr>
-					<td colspan="3">Realizar reservas caso disponível</td>
+					<td colspan="3">'.$info['status'].'</td>
 				</tr>
 				
 			</table>
