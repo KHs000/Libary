@@ -1,0 +1,17 @@
+.logout {
+  max-width: 100%;
+  width: 40%;
+  margin: auto;
+  padding: 10%;
+  text-align: center;
+}
+
+.redir {
+  text-decoration: none;
+  font-weight: bold;
+  color: #00376a;
+}
+
+.redir:hover {
+  color: #2b529c;
+}

@@ -107,7 +107,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
         ajuda = new javax.swing.JButton();
         acervo_header = new javax.swing.JLabel();
         foto_admin = new javax.swing.JPanel();
-        ocorrencias = new javax.swing.JButton();
+        content_area_text = new javax.swing.JLabel();
 
         jTextField3.setText("jTextField3");
 
@@ -261,7 +261,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             .addGap(0, 155, Short.MAX_VALUE)
         );
 
-        ocorrencias.setText("Ocorrências");
+        content_area_text.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,7 +274,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                     .addComponent(acervo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adm_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tela_pesq_comp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(foto_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -282,17 +282,18 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(ocorrencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cadastrar_obra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ajuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(content_area_text)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(acervo_header, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pesquisar)))
@@ -307,9 +308,14 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pesquisar))
-                        .addGap(22, 22, 22)
-                        .addComponent(acervo_header)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(acervo_header))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(content_area_text)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(foto_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,11 +329,9 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                         .addComponent(acervo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(usuarios)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ocorrencias)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cadastrar_obra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ajuda)
@@ -379,6 +383,8 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private void acervoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acervoActionPerformed
         if (evt.getSource() == acervo) {
             areaConteudo.removeAll();
+            areaConteudo.setFocusCycleRoot(true);
+            areaConteudo.setFocusable(true);
             try{
                 MysqlDataSource dataSource = new MysqlDataSource();
                 dataSource.setUser("root");
@@ -397,13 +403,12 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 //lista_livros.jScrollPane1.setBackground(Color.red);
                 //System.out.println(result.getString("Disponibilidade"));
                 
-                MouseListener rightEvt;
-                rightEvt = new MouseListener () {
+                MouseListener rightEvt = new MouseListener () {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (SwingUtilities.isRightMouseButton(e)) {
                             JPopupMenu popup = new JPopupMenu();
-                            
+                                                               
                             class PopupListener extends MouseAdapter {
                                 @Override
                                 public void mousePressed(MouseEvent e) {
@@ -443,6 +448,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                                             stmt.executeUpdate();
                                             areaConteudo.revalidate();
                                             areaConteudo.repaint();
+                                            row = 0;
                                         }
                                     }catch (SQLException ex) {
                                         ex.printStackTrace();
@@ -456,7 +462,8 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                             rent.addActionListener(new ActionListener () {
                                 @Override
                                 public void actionPerformed(ActionEvent evt) {
-                                    int row = lista_livros.jTable1.rowAtPoint(e.getPoint());
+                                    int row = 0;
+                                    row = lista_livros.jTable1.rowAtPoint(e.getPoint());
                                     DefaultTableModel model = (DefaultTableModel)lista_livros.jTable1.getModel();
                                     String selected = model.getValueAt(row,0).toString();
 
@@ -486,53 +493,13 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                                     }
                                     //JOptionPane.showMessageDialog(null, book);
                                     book.setVisible(true);
-    
                                 }
                             });
                             popup.add(rent);
                             
                             MouseListener popupListener = new PopupListener();
                             lista_livros.jTable1.addMouseListener(popupListener);
-                            
-                            /*int row = lista_livros.jTable1.rowAtPoint(e.getPoint());
-                            DefaultTableModel model = (DefaultTableModel)lista_livros.jTable1.getModel();
-                            String selected = (String) model.getValueAt(row,0);
-                            
-                            Tela_Livro book = new Tela_Livro ();
-                            
-                            book.titulo.setText(lista_livros.jTable1.getName());
-                            JOptionPane.showMessageDialog(null, selected);*/
                         }
-                        /*if (SwingUtilities.isLeftMouseButton(e)) {
-                        lista_livros.jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                        @Override
-                        public void valueChanged(ListSelectionEvent e) {
-                        int row = lista_livros.jTable1.getSelectedRow();
-                        DefaultTableModel model= (DefaultTableModel)lista_livros.jTable1.getModel();
-                        String selected = model.getValueAt(row,0).toString();
-                        
-                        try{
-                        MysqlDataSource dataSource = new MysqlDataSource();
-                        dataSource.setUser("root");
-                        dataSource.setPassword("");
-                        dataSource.setDatabaseName("biblioteca");
-                        dataSource.setServerName("localhost");
-                        Connection conn = dataSource.getConnection();
-                        
-                        if(JOptionPane.showConfirmDialog(null,"Deseja deletar essa obra do acervo?","Delete",JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
-                        PreparedStatement stmt = conn.prepareStatement("DELETE FROM acervo WHERE Título = ?");
-                        stmt.setString(1,selected);
-                        stmt.executeUpdate();
-                        //model.removeRow(row);
-                        areaConteudo.revalidate();
-                        areaConteudo.repaint();
-                        }
-                        }catch (SQLException ex) {
-                        ex.printStackTrace();
-                        }
-                        }
-                        });
-                        }*/
                     }
 
                     @Override
@@ -559,9 +526,9 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                 
                 conn.close();   
                 
-                acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
-                acervo_header.setVerticalAlignment(SwingConstants.CENTER);
-                acervo_header.setText("Obras cadastradas: "); 
+                content_area_text.setHorizontalAlignment(SwingConstants.CENTER);
+                content_area_text.setVerticalAlignment(SwingConstants.CENTER);
+                content_area_text.setText("Obras cadastradas: ");
             }catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Erro");
                     ex.printStackTrace();
@@ -569,12 +536,11 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
             finally{
                 lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
                 areaConteudo.setLayout(new FlowLayout());
-                areaConteudo.add(lista_livros); 
-            } 
-            areaConteudo.revalidate();
+                areaConteudo.add(lista_livros);
+            }
         }
     }//GEN-LAST:event_acervoActionPerformed
-
+   
     private void cadastrar_obraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrar_obraActionPerformed
         if(evt.getSource() == cadastrar_obra){
             Cadastro_Livro livro = new Cadastro_Livro();
@@ -637,7 +603,8 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private void tela_pesq_compActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tela_pesq_compActionPerformed
         // TODO add your handling code here:
         if(evt.getSource() == tela_pesq_comp){
-            Pesquisa_Composta_Adm pq = new Pesquisa_Composta_Adm();
+            //JOptionPane.showMessageDialog(null,this.getClass().getName());
+            Pesquisa_Composta_Adm pq = new Pesquisa_Composta_Adm(this);
             pq.setVisible(true);
             pq.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }
@@ -669,9 +636,9 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                
                 conn.close();   
                 
-                acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
-                acervo_header.setVerticalAlignment(SwingConstants.CENTER);
-                acervo_header.setText("Usuários cadastrados: "); 
+                content_area_text.setHorizontalAlignment(SwingConstants.CENTER);
+                content_area_text.setVerticalAlignment(SwingConstants.CENTER);
+                content_area_text.setText("Usuários cadastrados: "); 
             }catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Erro");
                     ex.printStackTrace();
@@ -709,12 +676,12 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Não existem resultados ao pesquisar no acervo.","Sem resultados",JOptionPane.INFORMATION_MESSAGE);
                 } else{
                     lista_livros.jTable1 = new JTable(buildTableModel(result));
-                    acervo_header.setHorizontalAlignment(SwingConstants.CENTER);
-                    acervo_header.setVerticalAlignment(SwingConstants.CENTER);
+                    content_area_text.setHorizontalAlignment(SwingConstants.CENTER);
+                    content_area_text.setVerticalAlignment(SwingConstants.CENTER);
                     lista_livros.jTable1.setFocusable(false);
                     lista_livros.jTable1.setRowSelectionAllowed(true);
-                    lista_livros.jTable1.setForeground(new Color(255,0,128));     //Boa cor para livro já pego
-                    acervo_header.setText("Obras selecionadas: ");
+                    lista_livros.jTable1.setForeground(new Color(9,22,214));     //Boa cor para livro já pego
+                    content_area_text.setText("Obras selecionadas: ");
                     lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
                     areaConteudo.setLayout(new FlowLayout());
                     areaConteudo.add(lista_livros);
@@ -820,6 +787,7 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JButton ajuda;
     protected javax.swing.JPanel areaConteudo;
     private javax.swing.JButton cadastrar_obra;
+    protected javax.swing.JLabel content_area_text;
     protected javax.swing.JPanel foto_admin;
     protected javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -830,7 +798,6 @@ public class Home_Screen_Adm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton logout;
-    private javax.swing.JButton ocorrencias;
     private javax.swing.JButton pesquisar;
     private javax.swing.JButton tela_pesq_comp;
     private javax.swing.JButton usuarios;

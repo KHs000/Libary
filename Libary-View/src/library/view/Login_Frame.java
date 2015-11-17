@@ -159,9 +159,10 @@ public class Login_Frame extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Logado");
                         dispose();
                         Home_Screen_Adm adm = new Home_Screen_Adm(fieldlogin.getText()); 
-
+                        
                         adm.setVisible(true);
                         adm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        adm.setSize(935,665);
                     }
                 } catch(SQLException ex){
                     ex.printStackTrace();

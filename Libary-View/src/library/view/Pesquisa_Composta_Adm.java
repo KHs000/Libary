@@ -28,6 +28,7 @@ public class Pesquisa_Composta_Adm extends javax.swing.JFrame {
     Lista_Livros lista_livros = new Lista_Livros ();    
     JTable table = new JTable();
     String autor, titulo, ano, assunto, palavra_reservada;
+    Home_Screen_Adm org;
     /**
      * Creates new form Pesquisa_Composta_Adm
      */
@@ -192,7 +193,7 @@ public class Pesquisa_Composta_Adm extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getSource()==pesquisa_composta){
             //JOptionPane.showMessageDialog(null, "eghfjkgfw");
-            
+            org.areaConteudo.removeAll();
             String sql = "SELECT Título,Autor,Assunto,Editora,Ano,Código,Disponibilidade FROM acervo WHERE Autor LIKE ?"
                     + "AND Título LIKE ?"
                     + "AND Ano LIKE ?"
@@ -283,10 +284,25 @@ public class Pesquisa_Composta_Adm extends javax.swing.JFrame {
                 } */
                 ResultSet result = stmt.executeQuery();
                 // areaConteudo.removeAll();
-                lista_livros.jTable1 = new JTable(buildTableModel(result));
+                if(!result.isBeforeFirst()){
+                    JOptionPane.showMessageDialog(null,"Não houveram resultados para essa pesquisa.","Resultado(s)",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                                    lista_livros.jTable1 = new JTable(buildTableModel(result));
+                lista_livros.jTable1.setForeground(new Color(9,22,214));     //Boa cor para livro já pego);
+                lista_livros.jScrollPane1.getViewport().add(lista_livros.jTable1);
+                org.areaConteudo.setLayout(new FlowLayout());
+                org.areaConteudo.add(lista_livros);
+                org.content_area_text.setText("Obras selecionadas:");
+                }
+                //org.areaConteudo.add(lista_livros.jTable1);
+                //org.areaConteudo.setVisible(true);
+                //org.areaConteudo.removeAll();
+                //org.areaConteudo.add(lista_livros.jTable1);
+                //org.areaConteudo.repaint();
                 //JOptionPane.showMessageDialog(null, "eghfjkgfw");
                 //o.setTable(lista_livros.jTable1);
-                JOptionPane.showMessageDialog(null,lista_livros.jTable1);
+                //JOptionPane.showMessageDialog(null,lista_livros.jTable1);
                 conn.close();
             }catch(SQLException ex){
                 ex.printStackTrace();
@@ -309,6 +325,11 @@ public class Pesquisa_Composta_Adm extends javax.swing.JFrame {
             } */
         }    
     }//GEN-LAST:event_pesquisa_compostaActionPerformed
+
+    public Pesquisa_Composta_Adm(Home_Screen_Adm hsa) {
+        initComponents();
+        org = hsa;
+    }
 
     /**
      * @param args the command line arguments

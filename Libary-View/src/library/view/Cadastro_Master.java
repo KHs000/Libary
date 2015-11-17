@@ -33,15 +33,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Cadastro_Master extends javax.swing.JFrame {
     private JFileChooser chooser = new JFileChooser();
-
+    BufferedImage img = null;
     String text;
     public Cadastro_Master() {
         this.text = jTextField1.getText();
         initComponents();
-    }
-    private void save(BufferedImage image, String ext) {
-        File file = new File(text.substring(89,text.length()-1));
-        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -245,7 +241,12 @@ public class Cadastro_Master extends javax.swing.JFrame {
                 stmt.setString(2, master_nickname.getText());
                 stmt.setString(3, master_password.getText());
                 stmt.setString(4, emailfield.getText());
-                stmt.setString(5, telephonefield.getText()); 
+                stmt.setString(5, telephonefield.getText());
+                try{
+                    img = ImageIO.read(new File(text.substring(89,text.length()-1)));
+                } catch(IOException e){
+                    e.printStackTrace();
+                }
                 stmt.executeUpdate();
                 
                 JOptionPane.showMessageDialog(null,"Admnistrador cadastrado com sucesso","Cadastro",JOptionPane.INFORMATION_MESSAGE);
